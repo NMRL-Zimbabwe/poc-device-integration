@@ -1,6 +1,6 @@
-echo "Building Central Repository app for production ....";
+echo "Building poc device integration app for production ....";
 mvn clean install -DskipTests -Dspring.profiles.active=prod
-docker-compose build centralrepo
-docker-compose up -d centralrepo
-echo "Done buiding central repo :)";
+docker-compose build pocdeviceintegration
+docker-compose up -d pocdeviceintegration
+echo "Done buiding poc device integration:)";
 docker-compose ps
