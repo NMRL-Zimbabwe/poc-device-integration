@@ -1,0 +1,103 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-patient-heading"
+        data-cy="PatientCreateUpdateHeading"
+        jhiTranslate="pocDeviceIntegrationApp.patient.home.createOrEditLabel"
+      >
+        Create or edit a Patient
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.patient.firstName" for="field_firstName">First Name</label>
+          <input type="text" class="form-control" name="firstName" id="field_firstName" data-cy="firstName" formControlName="firstName" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.patient.lastName" for="field_lastName">Last Name</label>
+          <input type="text" class="form-control" name="lastName" id="field_lastName" data-cy="lastName" formControlName="lastName" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.patient.dob" for="field_dob">Dob</label>
+          <div class="input-group">
+            <input
+              id="field_dob"
+              data-cy="dob"
+              type="text"
+              class="form-control"
+              name="dob"
+              ngbDatepicker
+              #dobDp="ngbDatepicker"
+              formControlName="dob"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dobDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.patient.age" for="field_age">Age</label>
+          <input type="text" class="form-control" name="age" id="field_age" data-cy="age" formControlName="age" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.patient.gender" for="field_gender">Gender</label>
+          <input type="text" class="form-control" name="gender" id="field_gender" data-cy="gender" formControlName="gender" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.patient.primaryReferrer" for="field_primaryReferrer"
+            >Primary Referrer</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="primaryReferrer"
+            id="field_primaryReferrer"
+            data-cy="primaryReferrer"
+            formControlName="primaryReferrer"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.patient.clientPatientId" for="field_clientPatientId"
+            >Client Patient Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="clientPatientId"
+            id="field_clientPatientId"
+            data-cy="clientPatientId"
+            formControlName="clientPatientId"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

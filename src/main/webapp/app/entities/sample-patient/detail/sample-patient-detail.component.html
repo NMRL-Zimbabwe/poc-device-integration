@@ -1,0 +1,110 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="samplePatient">
+      <h2 data-cy="samplePatientDetailsHeading">
+        <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.detail.title">Sample Patient</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ samplePatient.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.firstName">First Name</span></dt>
+        <dd>
+          <span>{{ samplePatient.firstName }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.lastName">Last Name</span></dt>
+        <dd>
+          <span>{{ samplePatient.lastName }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.dob">Dob</span></dt>
+        <dd>
+          <span>{{ samplePatient.dob | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.age">Age</span></dt>
+        <dd>
+          <span>{{ samplePatient.age }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.gender">Gender</span></dt>
+        <dd>
+          <span>{{ samplePatient.gender }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.primaryReferrer">Primary Referrer</span></dt>
+        <dd>
+          <span>{{ samplePatient.primaryReferrer }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.clientPatientId">Client Patient Id</span></dt>
+        <dd>
+          <span>{{ samplePatient.clientPatientId }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.clientSampleId">Client Sample Id</span></dt>
+        <dd>
+          <span>{{ samplePatient.clientSampleId }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.clientContact">Client Contact</span></dt>
+        <dd>
+          <span>{{ samplePatient.clientContact }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.sampleTypeId">Sample Type Id</span></dt>
+        <dd>
+          <span>{{ samplePatient.sampleTypeId }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.sampleTypeName">Sample Type Name</span></dt>
+        <dd>
+          <span>{{ samplePatient.sampleTypeName }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.analysisServiceId">Analysis Service Id</span></dt>
+        <dd>
+          <span>{{ samplePatient.analysisServiceId }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.analysisServiceName">Analysis Service Name</span></dt>
+        <dd>
+          <span>{{ samplePatient.analysisServiceName }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.dateCollected">Date Collected</span></dt>
+        <dd>
+          <span>{{ samplePatient.dateCollected | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.dateRegistered">Date Registered</span></dt>
+        <dd>
+          <span>{{ samplePatient.dateRegistered | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.dateTested">Date Tested</span></dt>
+        <dd>
+          <span>{{ samplePatient.dateTested | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.result">Result</span></dt>
+        <dd>
+          <span>{{ samplePatient.result }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.unit">Unit</span></dt>
+        <dd>
+          <span>{{ samplePatient.unit }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.datePublished">Date Published</span></dt>
+        <dd>
+          <span>{{ samplePatient.datePublished | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="pocDeviceIntegrationApp.samplePatient.state">State</span></dt>
+        <dd>
+          <span>{{ samplePatient.state }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/sample-patient', samplePatient.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

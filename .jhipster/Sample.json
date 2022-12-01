@@ -1,0 +1,72 @@
+{
+  "applications": "*",
+  "changelogDate": "20221201105943",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "sample",
+  "fields": [
+    {
+      "fieldName": "patientId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "clientSampleId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "clientContact",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sampleTypeId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sampleTypeName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "analysisServiceId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "analysisServiceName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateCollected",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateRegistered",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateTested",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "result",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "datePublished",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "state",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Sample",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}

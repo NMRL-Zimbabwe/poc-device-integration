@@ -1,0 +1,241 @@
+<div>
+  <h2 id="page-heading" data-cy="SamplePatientHeading">
+    <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.home.title">Sample Patients</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-sample-patient"
+        [routerLink]="['/sample-patient/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.home.createLabel"> Create a new Sample Patient </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <jhi-filter [filters]="filters"></jhi-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="samplePatients?.length === 0">
+    <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.home.notFound">No Sample Patients found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="samplePatients && samplePatients.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="firstName">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.firstName">First Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastName">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.lastName">Last Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dob">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.dob">Dob</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="age">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.age">Age</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="gender">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.gender">Gender</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="primaryReferrer">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.primaryReferrer">Primary Referrer</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="clientPatientId">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.clientPatientId">Client Patient Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="clientSampleId">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.clientSampleId">Client Sample Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="clientContact">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.clientContact">Client Contact</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="sampleTypeId">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.sampleTypeId">Sample Type Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="sampleTypeName">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.sampleTypeName">Sample Type Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="analysisServiceId">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.analysisServiceId">Analysis Service Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="analysisServiceName">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.analysisServiceName">Analysis Service Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateCollected">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.dateCollected">Date Collected</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateRegistered">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.dateRegistered">Date Registered</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateTested">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.dateTested">Date Tested</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="result">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.result">Result</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="unit">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.unit">Unit</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="datePublished">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.datePublished">Date Published</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="state">
+            <div class="d-flex">
+              <span jhiTranslate="pocDeviceIntegrationApp.samplePatient.state">State</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let samplePatient of samplePatients; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/sample-patient', samplePatient.id, 'view']">{{ samplePatient.id }}</a>
+          </td>
+          <td>{{ samplePatient.firstName }}</td>
+          <td>{{ samplePatient.lastName }}</td>
+          <td>{{ samplePatient.dob | formatMediumDate }}</td>
+          <td>{{ samplePatient.age }}</td>
+          <td>{{ samplePatient.gender }}</td>
+          <td>{{ samplePatient.primaryReferrer }}</td>
+          <td>{{ samplePatient.clientPatientId }}</td>
+          <td>{{ samplePatient.clientSampleId }}</td>
+          <td>{{ samplePatient.clientContact }}</td>
+          <td>{{ samplePatient.sampleTypeId }}</td>
+          <td>{{ samplePatient.sampleTypeName }}</td>
+          <td>{{ samplePatient.analysisServiceId }}</td>
+          <td>{{ samplePatient.analysisServiceName }}</td>
+          <td>{{ samplePatient.dateCollected | formatMediumDate }}</td>
+          <td>{{ samplePatient.dateRegistered | formatMediumDate }}</td>
+          <td>{{ samplePatient.dateTested | formatMediumDate }}</td>
+          <td>{{ samplePatient.result }}</td>
+          <td>{{ samplePatient.unit }}</td>
+          <td>{{ samplePatient.datePublished | formatMediumDate }}</td>
+          <td>{{ samplePatient.state }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/sample-patient', samplePatient.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/sample-patient', samplePatient.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(samplePatient)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="samplePatients && samplePatients.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>
