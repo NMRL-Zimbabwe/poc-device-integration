@@ -1,0 +1,20 @@
+{
+  "applications": "*",
+  "changelogDate": "20221201105944",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "sample_type",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "SampleType",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,37 @@
+{
+  "pocDeviceIntegrationApp": {
+    "sample": {
+      "home": {
+        "title": "Samples",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Sample",
+        "createOrEditLabel": "Create or edit a Sample",
+        "notFound": "No Samples found"
+      },
+      "created": "A new Sample is created with identifier {{ param }}",
+      "updated": "A Sample is updated with identifier {{ param }}",
+      "deleted": "A Sample is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Sample {{ id }}?"
+      },
+      "detail": {
+        "title": "Sample"
+      },
+      "id": "ID",
+      "patientId": "Patient Id",
+      "clientSampleId": "Client Sample Id",
+      "clientContact": "Client Contact",
+      "sampleTypeId": "Sample Type Id",
+      "sampleTypeName": "Sample Type Name",
+      "analysisServiceId": "Analysis Service Id",
+      "analysisServiceName": "Analysis Service Name",
+      "dateCollected": "Date Collected",
+      "dateRegistered": "Date Registered",
+      "dateTested": "Date Tested",
+      "result": "Result",
+      "unit": "Unit",
+      "datePublished": "Date Published",
+      "state": "State"
+    }
+  }
+}

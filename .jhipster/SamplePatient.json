@@ -1,0 +1,96 @@
+{
+  "applications": "*",
+  "changelogDate": "20221201105946",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "sample_patient",
+  "fields": [
+    {
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dob",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "age",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "primaryReferrer",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "clientPatientId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "clientSampleId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "clientContact",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sampleTypeId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sampleTypeName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "analysisServiceId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "analysisServiceName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateCollected",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateRegistered",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateTested",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "result",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "datePublished",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "state",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "SamplePatient",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}

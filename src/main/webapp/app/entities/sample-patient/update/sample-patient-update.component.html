@@ -1,0 +1,284 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-sample-patient-heading"
+        data-cy="SamplePatientCreateUpdateHeading"
+        jhiTranslate="pocDeviceIntegrationApp.samplePatient.home.createOrEditLabel"
+      >
+        Create or edit a Sample Patient
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.firstName" for="field_firstName">First Name</label>
+          <input type="text" class="form-control" name="firstName" id="field_firstName" data-cy="firstName" formControlName="firstName" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.lastName" for="field_lastName">Last Name</label>
+          <input type="text" class="form-control" name="lastName" id="field_lastName" data-cy="lastName" formControlName="lastName" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.dob" for="field_dob">Dob</label>
+          <div class="input-group">
+            <input
+              id="field_dob"
+              data-cy="dob"
+              type="text"
+              class="form-control"
+              name="dob"
+              ngbDatepicker
+              #dobDp="ngbDatepicker"
+              formControlName="dob"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dobDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.age" for="field_age">Age</label>
+          <input type="text" class="form-control" name="age" id="field_age" data-cy="age" formControlName="age" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.gender" for="field_gender">Gender</label>
+          <input type="text" class="form-control" name="gender" id="field_gender" data-cy="gender" formControlName="gender" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.primaryReferrer" for="field_primaryReferrer"
+            >Primary Referrer</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="primaryReferrer"
+            id="field_primaryReferrer"
+            data-cy="primaryReferrer"
+            formControlName="primaryReferrer"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.clientPatientId" for="field_clientPatientId"
+            >Client Patient Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="clientPatientId"
+            id="field_clientPatientId"
+            data-cy="clientPatientId"
+            formControlName="clientPatientId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.clientSampleId" for="field_clientSampleId"
+            >Client Sample Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="clientSampleId"
+            id="field_clientSampleId"
+            data-cy="clientSampleId"
+            formControlName="clientSampleId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.clientContact" for="field_clientContact"
+            >Client Contact</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="clientContact"
+            id="field_clientContact"
+            data-cy="clientContact"
+            formControlName="clientContact"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.sampleTypeId" for="field_sampleTypeId"
+            >Sample Type Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="sampleTypeId"
+            id="field_sampleTypeId"
+            data-cy="sampleTypeId"
+            formControlName="sampleTypeId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.sampleTypeName" for="field_sampleTypeName"
+            >Sample Type Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="sampleTypeName"
+            id="field_sampleTypeName"
+            data-cy="sampleTypeName"
+            formControlName="sampleTypeName"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.analysisServiceId" for="field_analysisServiceId"
+            >Analysis Service Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="analysisServiceId"
+            id="field_analysisServiceId"
+            data-cy="analysisServiceId"
+            formControlName="analysisServiceId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.analysisServiceName" for="field_analysisServiceName"
+            >Analysis Service Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="analysisServiceName"
+            id="field_analysisServiceName"
+            data-cy="analysisServiceName"
+            formControlName="analysisServiceName"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.dateCollected" for="field_dateCollected"
+            >Date Collected</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateCollected"
+              data-cy="dateCollected"
+              type="text"
+              class="form-control"
+              name="dateCollected"
+              ngbDatepicker
+              #dateCollectedDp="ngbDatepicker"
+              formControlName="dateCollected"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateCollectedDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.dateRegistered" for="field_dateRegistered"
+            >Date Registered</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateRegistered"
+              data-cy="dateRegistered"
+              type="text"
+              class="form-control"
+              name="dateRegistered"
+              ngbDatepicker
+              #dateRegisteredDp="ngbDatepicker"
+              formControlName="dateRegistered"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateRegisteredDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.dateTested" for="field_dateTested"
+            >Date Tested</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateTested"
+              data-cy="dateTested"
+              type="text"
+              class="form-control"
+              name="dateTested"
+              ngbDatepicker
+              #dateTestedDp="ngbDatepicker"
+              formControlName="dateTested"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateTestedDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.result" for="field_result">Result</label>
+          <input type="text" class="form-control" name="result" id="field_result" data-cy="result" formControlName="result" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.unit" for="field_unit">Unit</label>
+          <input type="text" class="form-control" name="unit" id="field_unit" data-cy="unit" formControlName="unit" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.datePublished" for="field_datePublished"
+            >Date Published</label
+          >
+          <div class="input-group">
+            <input
+              id="field_datePublished"
+              data-cy="datePublished"
+              type="text"
+              class="form-control"
+              name="datePublished"
+              ngbDatepicker
+              #datePublishedDp="ngbDatepicker"
+              formControlName="datePublished"
+            />
+            <button type="button" class="btn btn-secondary" (click)="datePublishedDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pocDeviceIntegrationApp.samplePatient.state" for="field_state">State</label>
+          <input type="text" class="form-control" name="state" id="field_state" data-cy="state" formControlName="state" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

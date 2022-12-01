@@ -1,0 +1,67 @@
+entity Client {
+	name String
+}
+
+entity Patient {
+	firstName String
+    lastName String
+    dob LocalDate
+    age String
+    gender String
+    primaryReferrer String
+    clientPatientId String
+}
+
+entity Sample {
+	patientId String
+	clientSampleId String
+    clientContact String
+    sampleTypeId String
+    sampleTypeName String
+    analysisServiceId String
+    analysisServiceName String
+    dateCollected LocalDate
+    dateRegistered LocalDate
+    dateTested LocalDate
+    result String
+    unit String
+    datePublished LocalDate
+    state String
+}
+
+entity SampleType {
+	name String
+}
+
+entity AnalysisService {
+	name String
+    unit String
+}
+
+entity SamplePatient {
+	firstName String
+    lastName String
+    dob LocalDate
+    age String
+    gender String
+    primaryReferrer String
+    clientPatientId String
+	clientSampleId String
+    clientContact String
+    sampleTypeId String
+    sampleTypeName String
+    analysisServiceId String
+    analysisServiceName String
+    dateCollected LocalDate
+    dateRegistered LocalDate
+    dateTested LocalDate
+    result String
+    unit String
+    datePublished LocalDate
+    state String
+}
+
+// Set pagination options
+paginate * with pagination
+service all with serviceImpl
+filter *
