@@ -32,9 +32,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/pocDeviceIntegration
-    username: pocDeviceIntegration
-    password:
+    url: jdbc:postgresql://192.168.0.40:5432/poc_devices
+    username: nmrl
+    password: password
     hikari:
       poolName: Hikari
       auto-commit: false
