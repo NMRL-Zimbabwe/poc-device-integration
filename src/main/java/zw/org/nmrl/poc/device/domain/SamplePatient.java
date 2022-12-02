@@ -19,9 +19,10 @@ public class SamplePatient implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GenericGenerator(name = "uuid4", strategy = "uuid4")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "uuid4")
+    //    @Id
+    //    @GenericGenerator(name = "uuid4", strategy = "uuid4")
+    //    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "uuid4")
+    //    @Column(name = "id", length = 255, nullable = false, updatable = false)
     @Column(name = "id", length = 255, nullable = false, updatable = false)
     private String id;
 
