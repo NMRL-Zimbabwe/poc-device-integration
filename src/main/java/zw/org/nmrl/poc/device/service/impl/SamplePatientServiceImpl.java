@@ -30,7 +30,7 @@ public class SamplePatientServiceImpl implements SamplePatientService {
     public SamplePatient save(SamplePatient samplePatient) {
         log.debug("Request to save SamplePatient : {}", samplePatient);
 
-        SamplePatient exist = samplePatientRepository.findByExternalUniqueIdentifer(samplePatient.getExternalUniqueIdentifer());
+        SamplePatient exist = samplePatientRepository.findByExternalUniqueIdentifier(samplePatient.getExternalUniqueIdentifier());
 
         if (exist != null) {
             samplePatient.setId(exist.getId());

@@ -82,9 +82,9 @@ public class SamplePatientQueryService extends QueryService<SamplePatient> {
             if (criteria.getDistinct() != null) {
                 specification = specification.and(distinct(criteria.getDistinct()));
             }
-            if (criteria.getId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getId(), SamplePatient_.id));
-            }
+            //            if (criteria.getId() != null) {
+            //                specification = specification.and(buildRangeSpecification(criteria.getId().toString(), SamplePatient_.id.toString()));
+            //            }
             if (criteria.getFirstName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getFirstName(), SamplePatient_.firstName));
             }

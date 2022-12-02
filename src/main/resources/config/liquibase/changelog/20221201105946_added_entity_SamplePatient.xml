@@ -14,8 +14,8 @@
             <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="external_unique_identifer" type="varchar(255)">
-                <constraints  nullable="true"/>
+            <column name="external_unique_identifier" type="varchar(255)">
+                <constraints  nullable="false"/>
             </column>
             <column name="first_name" type="varchar(255)">
                 <constraints nullable="true" />

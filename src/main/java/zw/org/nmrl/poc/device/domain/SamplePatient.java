@@ -29,8 +29,8 @@ public class SamplePatient implements Serializable {
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "external_unique_identifer")
-    private String externalUniqueIdentifer;
+    @Column(name = "external_unique_identifier")
+    private String externalUniqueIdentifier;
 
     @Column(name = "first_name")
     private String firstName;
@@ -100,12 +100,12 @@ public class SamplePatient implements Serializable {
         this.id = id;
     }
 
-    public String getExternalUniqueIdentifer() {
-        return externalUniqueIdentifer;
+    public String getExternalUniqueIdentifier() {
+        return externalUniqueIdentifier;
     }
 
-    public void setExternalUniqueIdentifer(String externalUniqueIdentifer) {
-        this.externalUniqueIdentifer = externalUniqueIdentifer;
+    public void setExternalUniqueIdentifer(String externalUniqueIdentifier) {
+        this.externalUniqueIdentifier = externalUniqueIdentifier;
     }
 
     public String getFirstName() {

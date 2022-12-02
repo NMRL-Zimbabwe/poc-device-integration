@@ -2,6 +2,7 @@ package zw.org.nmrl.poc.device.service.criteria;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.UUID;
 import org.springdoc.api.annotations.ParameterObject;
 import tech.jhipster.service.Criteria;
 import tech.jhipster.service.filter.*;
@@ -21,7 +22,7 @@ public class SamplePatientCriteria implements Serializable, Criteria {
 
     private static final long serialVersionUID = 1L;
 
-    private LongFilter id;
+    private UUID id;
 
     private StringFilter firstName;
 
@@ -68,7 +69,7 @@ public class SamplePatientCriteria implements Serializable, Criteria {
     public SamplePatientCriteria() {}
 
     public SamplePatientCriteria(SamplePatientCriteria other) {
-        this.id = other.id == null ? null : other.id.copy();
+        this.id = other.id == null ? null : other.id;
         this.firstName = other.firstName == null ? null : other.firstName.copy();
         this.lastName = other.lastName == null ? null : other.lastName.copy();
         this.dob = other.dob == null ? null : other.dob.copy();
@@ -97,18 +98,18 @@ public class SamplePatientCriteria implements Serializable, Criteria {
         return new SamplePatientCriteria(this);
     }
 
-    public LongFilter getId() {
+    public UUID getId() {
         return id;
     }
 
-    public LongFilter id() {
+    public UUID id() {
         if (id == null) {
-            id = new LongFilter();
+            id = UUID.randomUUID();
         }
         return id;
     }
 
-    public void setId(LongFilter id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

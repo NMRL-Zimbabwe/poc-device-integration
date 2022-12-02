@@ -11,5 +11,5 @@ import zw.org.nmrl.poc.device.domain.SamplePatient;
 @SuppressWarnings("unused")
 @Repository
 public interface SamplePatientRepository extends JpaRepository<SamplePatient, String>, JpaSpecificationExecutor<SamplePatient> {
-    SamplePatient findByExternalUniqueIdentifer(String externalUniqueIdentifer);
+    SamplePatient findByExternalUniqueIdentifier(String externalUniqueIdentifier);
 }
