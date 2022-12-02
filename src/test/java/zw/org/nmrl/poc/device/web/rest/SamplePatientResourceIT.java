@@ -220,7 +220,7 @@ class SamplePatientResourceIT {
     @Transactional
     void createSamplePatientWithExistingId() throws Exception {
         // Create the SamplePatient with an existing ID
-        samplePatient.setId(1L);
+        samplePatient.setId(new String());
 
         int databaseSizeBeforeCreate = samplePatientRepository.findAll().size();
 
@@ -245,7 +245,7 @@ class SamplePatientResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(samplePatient.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(samplePatient.getId())))
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME)))
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME)))
             .andExpect(jsonPath("$.[*].dob").value(hasItem(DEFAULT_DOB.toString())))
@@ -279,7 +279,7 @@ class SamplePatientResourceIT {
             .perform(get(ENTITY_API_URL_ID, samplePatient.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(samplePatient.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(samplePatient.getId()))
             .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME))
             .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME))
             .andExpect(jsonPath("$.dob").value(DEFAULT_DOB.toString()))
@@ -308,7 +308,7 @@ class SamplePatientResourceIT {
         // Initialize the database
         samplePatientRepository.saveAndFlush(samplePatient);
 
-        Long id = samplePatient.getId();
+        String id = samplePatient.getId();
 
         defaultSamplePatientShouldBeFound("id.equals=" + id);
         defaultSamplePatientShouldNotBeFound("id.notEquals=" + id);
@@ -1758,7 +1758,7 @@ class SamplePatientResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc&" + filter))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(samplePatient.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(samplePatient.getId())))
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME)))
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME)))
             .andExpect(jsonPath("$.[*].dob").value(hasItem(DEFAULT_DOB.toString())))
@@ -1886,7 +1886,7 @@ class SamplePatientResourceIT {
     @Transactional
     void putNonExistingSamplePatient() throws Exception {
         int databaseSizeBeforeUpdate = samplePatientRepository.findAll().size();
-        samplePatient.setId(count.incrementAndGet());
+        samplePatient.setId(new String());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restSamplePatientMockMvc
@@ -1906,7 +1906,7 @@ class SamplePatientResourceIT {
     @Transactional
     void putWithIdMismatchSamplePatient() throws Exception {
         int databaseSizeBeforeUpdate = samplePatientRepository.findAll().size();
-        samplePatient.setId(count.incrementAndGet());
+        samplePatient.setId(new String());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSamplePatientMockMvc
@@ -1926,7 +1926,7 @@ class SamplePatientResourceIT {
     @Transactional
     void putWithMissingIdPathParamSamplePatient() throws Exception {
         int databaseSizeBeforeUpdate = samplePatientRepository.findAll().size();
-        samplePatient.setId(count.incrementAndGet());
+        samplePatient.setId(new String());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSamplePatientMockMvc
@@ -2068,7 +2068,7 @@ class SamplePatientResourceIT {
     @Transactional
     void patchNonExistingSamplePatient() throws Exception {
         int databaseSizeBeforeUpdate = samplePatientRepository.findAll().size();
-        samplePatient.setId(count.incrementAndGet());
+        samplePatient.setId(new String());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restSamplePatientMockMvc
@@ -2088,7 +2088,7 @@ class SamplePatientResourceIT {
     @Transactional
     void patchWithIdMismatchSamplePatient() throws Exception {
         int databaseSizeBeforeUpdate = samplePatientRepository.findAll().size();
-        samplePatient.setId(count.incrementAndGet());
+        samplePatient.setId(new String());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSamplePatientMockMvc
@@ -2108,7 +2108,7 @@ class SamplePatientResourceIT {
     @Transactional
     void patchWithMissingIdPathParamSamplePatient() throws Exception {
         int databaseSizeBeforeUpdate = samplePatientRepository.findAll().size();
-        samplePatient.setId(count.incrementAndGet());
+        samplePatient.setId(new String());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSamplePatientMockMvc

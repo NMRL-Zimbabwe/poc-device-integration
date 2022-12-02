@@ -11,13 +11,13 @@ class SamplePatientTest {
     void equalsVerifier() throws Exception {
         TestUtil.equalsVerifier(SamplePatient.class);
         SamplePatient samplePatient1 = new SamplePatient();
-        samplePatient1.setId(1L);
+        samplePatient1.setId(new String());
         SamplePatient samplePatient2 = new SamplePatient();
         samplePatient2.setId(samplePatient1.getId());
         assertThat(samplePatient1).isEqualTo(samplePatient2);
-        samplePatient2.setId(2L);
+        samplePatient2.setId(new String());
         assertThat(samplePatient1).isNotEqualTo(samplePatient2);
-        samplePatient1.setId(null);
+        samplePatient1.setId(new String());
         assertThat(samplePatient1).isNotEqualTo(samplePatient2);
     }
 }

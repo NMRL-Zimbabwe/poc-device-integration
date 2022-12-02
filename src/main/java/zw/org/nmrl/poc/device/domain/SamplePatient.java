@@ -3,11 +3,7 @@ package zw.org.nmrl.poc.device.domain;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
@@ -24,10 +20,10 @@ public class SamplePatient implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id")
-    private UUID id;
+    @GenericGenerator(name = "uuid4", strategy = "uuid4")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "uuid4")
+    @Column(name = "id", length = 255, nullable = false, updatable = false)
+    private String id;
 
     @Column(name = "external_unique_identifier")
     private String externalUniqueIdentifier;
@@ -92,11 +88,11 @@ public class SamplePatient implements Serializable {
     @Column(name = "state")
     private String state;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 

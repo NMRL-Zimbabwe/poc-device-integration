@@ -22,7 +22,7 @@ public class SamplePatientCriteria implements Serializable, Criteria {
 
     private static final long serialVersionUID = 1L;
 
-    private UUID id;
+    private StringFilter id;
 
     private StringFilter firstName;
 
@@ -69,7 +69,7 @@ public class SamplePatientCriteria implements Serializable, Criteria {
     public SamplePatientCriteria() {}
 
     public SamplePatientCriteria(SamplePatientCriteria other) {
-        this.id = other.id == null ? null : other.id;
+        this.id = other.id == null ? null : other.id.copy();
         this.firstName = other.firstName == null ? null : other.firstName.copy();
         this.lastName = other.lastName == null ? null : other.lastName.copy();
         this.dob = other.dob == null ? null : other.dob.copy();
@@ -98,18 +98,18 @@ public class SamplePatientCriteria implements Serializable, Criteria {
         return new SamplePatientCriteria(this);
     }
 
-    public UUID getId() {
+    public StringFilter getId() {
         return id;
     }
 
-    public UUID id() {
+    public StringFilter id() {
         if (id == null) {
-            id = UUID.randomUUID();
+            id = new StringFilter();
         }
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(StringFilter id) {
         this.id = id;
     }
 
