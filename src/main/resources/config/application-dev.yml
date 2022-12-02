@@ -32,7 +32,7 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://192.168.0.40:5432/poc_devices
+    url: jdbc:postgresql://192.168.0.40:5432/poc_device
     username: nmrl
     password: password
     hikari:
@@ -84,6 +84,7 @@ jhipster:
         # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
         base64-secret: ODA1Mjg2ZGFhOTM4NTJhOGQ3Y2UxZWFkNmRlNTIyNGU4NTU4YzA2ZmQ3NjAwMTBjNTFlNWZkNTlmNGZlYTg0ODBiNzY2MjJhNTNmODJmNmMyMTFlMzdkMmNmMTgzOTI2ZTQ1MzgzYWMxN2QzYjM3MjhlZTQwYmRiMGFkYjAwOTE=
         # Token is valid 24 hours
+        #token-validity-in-seconds: 315360000
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000
   mail: # specific JHipster mail property, for standard properties see MailProperties

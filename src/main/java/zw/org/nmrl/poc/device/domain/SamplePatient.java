@@ -2,9 +2,15 @@ package zw.org.nmrl.poc.device.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import javax.persistence.*;
+import java.util.UUID;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * A SamplePatient.
@@ -18,10 +24,13 @@ public class SamplePatient implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id")
-    private Long id;
+    private UUID id;
+
+    @Column(name = "external_unique_identifer")
+    private String externalUniqueIdentifer;
 
     @Column(name = "first_name")
     private String firstName;
@@ -83,19 +92,20 @@ public class SamplePatient implements Serializable {
     @Column(name = "state")
     private String state;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
-
-    public Long getId() {
-        return this.id;
+    public UUID getId() {
+        return id;
     }
 
-    public SamplePatient id(Long id) {
-        this.setId(id);
-        return this;
-    }
-
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
+    }
+
+    public String getExternalUniqueIdentifer() {
+        return externalUniqueIdentifer;
+    }
+
+    public void setExternalUniqueIdentifer(String externalUniqueIdentifer) {
+        this.externalUniqueIdentifer = externalUniqueIdentifer;
     }
 
     public String getFirstName() {
@@ -358,7 +368,8 @@ public class SamplePatient implements Serializable {
         this.state = state;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here
 
     @Override
     public boolean equals(Object o) {
@@ -373,35 +384,23 @@ public class SamplePatient implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see
+        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
     // prettier-ignore
-    @Override
-    public String toString() {
-        return "SamplePatient{" +
-            "id=" + getId() +
-            ", firstName='" + getFirstName() + "'" +
-            ", lastName='" + getLastName() + "'" +
-            ", dob='" + getDob() + "'" +
-            ", age='" + getAge() + "'" +
-            ", gender='" + getGender() + "'" +
-            ", primaryReferrer='" + getPrimaryReferrer() + "'" +
-            ", clientPatientId='" + getClientPatientId() + "'" +
-            ", clientSampleId='" + getClientSampleId() + "'" +
-            ", clientContact='" + getClientContact() + "'" +
-            ", sampleTypeId='" + getSampleTypeId() + "'" +
-            ", sampleTypeName='" + getSampleTypeName() + "'" +
-            ", analysisServiceId='" + getAnalysisServiceId() + "'" +
-            ", analysisServiceName='" + getAnalysisServiceName() + "'" +
-            ", dateCollected='" + getDateCollected() + "'" +
-            ", dateRegistered='" + getDateRegistered() + "'" +
-            ", dateTested='" + getDateTested() + "'" +
-            ", result='" + getResult() + "'" +
-            ", unit='" + getUnit() + "'" +
-            ", datePublished='" + getDatePublished() + "'" +
-            ", state='" + getState() + "'" +
-            "}";
-    }
+	@Override
+	public String toString() {
+		return "SamplePatient{" + "id=" + getId() + ", firstName='" + getFirstName() + "'" + ", lastName='"
+				+ getLastName() + "'" + ", dob='" + getDob() + "'" + ", age='" + getAge() + "'" + ", gender='"
+				+ getGender() + "'" + ", primaryReferrer='" + getPrimaryReferrer() + "'" + ", clientPatientId='"
+				+ getClientPatientId() + "'" + ", clientSampleId='" + getClientSampleId() + "'" + ", clientContact='"
+				+ getClientContact() + "'" + ", sampleTypeId='" + getSampleTypeId() + "'" + ", sampleTypeName='"
+				+ getSampleTypeName() + "'" + ", analysisServiceId='" + getAnalysisServiceId() + "'"
+				+ ", analysisServiceName='" + getAnalysisServiceName() + "'" + ", dateCollected='" + getDateCollected()
+				+ "'" + ", dateRegistered='" + getDateRegistered() + "'" + ", dateTested='" + getDateTested() + "'"
+				+ ", result='" + getResult() + "'" + ", unit='" + getUnit() + "'" + ", datePublished='"
+				+ getDatePublished() + "'" + ", state='" + getState() + "'" + "}";
+	}
 }

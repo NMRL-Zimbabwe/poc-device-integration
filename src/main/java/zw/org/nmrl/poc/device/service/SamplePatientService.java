@@ -47,12 +47,12 @@ public interface SamplePatientService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<SamplePatient> findOne(Long id);
+    Optional<SamplePatient> findOne(String id);
 
     /**
      * Delete the "id" samplePatient.
      *
      * @param id the id of the entity.
      */
-    void delete(Long id);
+    void delete(String id);
 }

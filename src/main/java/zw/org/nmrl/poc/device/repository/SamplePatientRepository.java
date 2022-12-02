@@ -1,5 +1,6 @@
 package zw.org.nmrl.poc.device.repository;
 
+import java.util.UUID;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 import zw.org.nmrl.poc.device.domain.SamplePatient;
@@ -9,4 +10,6 @@ import zw.org.nmrl.poc.device.domain.SamplePatient;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface SamplePatientRepository extends JpaRepository<SamplePatient, Long>, JpaSpecificationExecutor<SamplePatient> {}
+public interface SamplePatientRepository extends JpaRepository<SamplePatient, String>, JpaSpecificationExecutor<SamplePatient> {
+    SamplePatient findByExternalUniqueIdentifer(String externalUniqueIdentifer);
+}

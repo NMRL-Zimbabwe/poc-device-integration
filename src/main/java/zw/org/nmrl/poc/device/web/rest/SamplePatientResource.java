@@ -86,7 +86,7 @@ public class SamplePatientResource {
      */
     @PutMapping("/sample-patients/{id}")
     public ResponseEntity<SamplePatient> updateSamplePatient(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody SamplePatient samplePatient
     ) throws URISyntaxException {
         log.debug("REST request to update SamplePatient : {}, {}", id, samplePatient);
@@ -121,7 +121,7 @@ public class SamplePatientResource {
      */
     @PatchMapping(value = "/sample-patients/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<SamplePatient> partialUpdateSamplePatient(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody SamplePatient samplePatient
     ) throws URISyntaxException {
         log.debug("REST request to partial update SamplePatient partially : {}, {}", id, samplePatient);
@@ -181,7 +181,7 @@ public class SamplePatientResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the samplePatient, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/sample-patients/{id}")
-    public ResponseEntity<SamplePatient> getSamplePatient(@PathVariable Long id) {
+    public ResponseEntity<SamplePatient> getSamplePatient(@PathVariable String id) {
         log.debug("REST request to get SamplePatient : {}", id);
         Optional<SamplePatient> samplePatient = samplePatientService.findOne(id);
         return ResponseUtil.wrapOrNotFound(samplePatient);
@@ -194,7 +194,7 @@ public class SamplePatientResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/sample-patients/{id}")
-    public ResponseEntity<Void> deleteSamplePatient(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteSamplePatient(@PathVariable String id) {
         log.debug("REST request to delete SamplePatient : {}", id);
         samplePatientService.delete(id);
         return ResponseEntity

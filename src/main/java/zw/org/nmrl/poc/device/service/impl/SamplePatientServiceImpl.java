@@ -29,6 +29,13 @@ public class SamplePatientServiceImpl implements SamplePatientService {
     @Override
     public SamplePatient save(SamplePatient samplePatient) {
         log.debug("Request to save SamplePatient : {}", samplePatient);
+
+        SamplePatient exist = samplePatientRepository.findByExternalUniqueIdentifer(samplePatient.getExternalUniqueIdentifer());
+
+        if (exist != null) {
+            samplePatient.setId(exist.getId());
+        }
+
         return samplePatientRepository.save(samplePatient);
     }
 
@@ -43,7 +50,7 @@ public class SamplePatientServiceImpl implements SamplePatientService {
         log.debug("Request to partially update SamplePatient : {}", samplePatient);
 
         return samplePatientRepository
-            .findById(samplePatient.getId())
+            .findById(samplePatient.getId().toString())
             .map(existingSamplePatient -> {
                 if (samplePatient.getFirstName() != null) {
                     existingSamplePatient.setFirstName(samplePatient.getFirstName());
@@ -120,13 +127,13 @@ public class SamplePatientServiceImpl implements SamplePatientService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<SamplePatient> findOne(Long id) {
+    public Optional<SamplePatient> findOne(String id) {
         log.debug("Request to get SamplePatient : {}", id);
         return samplePatientRepository.findById(id);
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(String id) {
         log.debug("Request to delete SamplePatient : {}", id);
         samplePatientRepository.deleteById(id);
     }

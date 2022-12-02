@@ -11,8 +11,11 @@
     -->
     <changeSet id="20221201105946-1" author="jhipster">
         <createTable tableName="sample_patient">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="external_unique_identifer" type="varchar(255)">
+                <constraints  nullable="true"/>
             </column>
             <column name="first_name" type="varchar(255)">
                 <constraints nullable="true" />
