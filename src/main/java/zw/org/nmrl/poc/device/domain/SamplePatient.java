@@ -23,6 +23,8 @@ public class SamplePatient implements Serializable {
     //    @GenericGenerator(name = "uuid4", strategy = "uuid4")
     //    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "uuid4")
     //    @Column(name = "id", length = 255, nullable = false, updatable = false)
+
+    @Id
     @Column(name = "id", length = 255, nullable = false, updatable = false)
     private String id;
 
