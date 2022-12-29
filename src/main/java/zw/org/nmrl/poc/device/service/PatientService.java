@@ -4,6 +4,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import zw.org.nmrl.poc.device.domain.Patient;
+import zw.org.nmrl.poc.device.service.dto.UnifiedPatientSampleCaseAnalysisDTO;
 
 /**
  * Service Interface for managing {@link Patient}.
@@ -55,4 +56,6 @@ public interface PatientService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+	Patient saveBatch(UnifiedPatientSampleCaseAnalysisDTO batch);
 }
