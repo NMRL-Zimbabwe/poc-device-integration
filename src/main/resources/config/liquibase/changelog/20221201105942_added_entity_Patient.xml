@@ -35,6 +35,9 @@
             <column name="client_patient_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="source" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>

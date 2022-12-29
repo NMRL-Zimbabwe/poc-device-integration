@@ -115,6 +115,7 @@ public class PatientServiceImpl implements PatientService {
 
 	@Override
 	public Patient saveBatch(UnifiedPatientSampleCaseAnalysisDTO batch) {
+		Patient savedPatient = null;
 		if (batch.getPatient() != null) {
 			PatientDTO ptDTO = batch.getPatient();
 			Patient pt = new Patient();
@@ -124,7 +125,7 @@ public class PatientServiceImpl implements PatientService {
 			pt.setGender(ptDTO.getGender().toString());
 			pt.setPrimaryReferrer(ptDTO.getPrimaryReferrer());
 
-			Patient savedPatient = patientRepository.save(pt);
+			savedPatient = patientRepository.save(pt);
 
 			if (savedPatient != null && batch.getAnalysisRequest() != null) {
 
@@ -151,6 +152,9 @@ public class PatientServiceImpl implements PatientService {
 
 						Analysis an = new Analysis();
 						an.setAnalysisId(new AnalysisId(analysisDTO.getAnalysisId(), UUID.randomUUID().toString()));
+						
+						an.setAnalysisRequestId(analysisDTO.getAnalysisRequestId());
+						an.setAnalysisRequestUid(analysisDTO.getAnalysisRequestUid());
 						an.setLabId(anDTO.getLabId());
 						an.setResult(analysisDTO.getResult());
 						an.setStatus(analysisDTO.getStatus());
@@ -173,6 +177,6 @@ public class PatientServiceImpl implements PatientService {
 
 			}
 		}
-		return null;
+		return savedPatient;
 	}
 }

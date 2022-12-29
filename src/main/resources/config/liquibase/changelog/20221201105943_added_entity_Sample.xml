@@ -53,6 +53,12 @@
             <column name="date_published" type="date">
                 <constraints nullable="true" />
             </column>
+            <column name="sample" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+             <column name="source" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="state" type="varchar(255)">
                 <constraints nullable="true" />
             </column>

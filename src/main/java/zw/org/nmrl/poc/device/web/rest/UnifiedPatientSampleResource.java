@@ -224,7 +224,7 @@ public class UnifiedPatientSampleResource {
         
         Patient result = patientService.saveBatch(batch);
         return ResponseEntity
-            .created(new URI("/api/patients/" + result.getId()))
+            .created(new URI("/api/patients/"))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }

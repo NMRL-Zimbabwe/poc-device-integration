@@ -15,172 +15,179 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Patient implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
-    @Column(name = "id")
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+	@SequenceGenerator(name = "sequenceGenerator")
+	@Column(name = "id")
+	private Long id;
 
-    @Column(name = "first_name")
-    private String firstName;
+	@Column(name = "first_name")
+	private String firstName;
 
-    @Column(name = "last_name")
-    private String lastName;
+	@Column(name = "last_name")
+	private String lastName;
 
-    @Column(name = "dob")
-    private LocalDate dob;
+	@Column(name = "dob")
+	private LocalDate dob;
 
-    @Column(name = "age")
-    private String age;
+	@Column(name = "age")
+	private String age;
 
-    @Column(name = "gender")
-    private String gender;
+	@Column(name = "gender")
+	private String gender;
 
-    @Column(name = "primary_referrer")
-    private String primaryReferrer;
+	@Column(name = "primary_referrer")
+	private String primaryReferrer;
 
-    @Column(name = "client_patient_id")
-    private String clientPatientId;
+	@Column(name = "client_patient_id")
+	private String clientPatientId;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
+	@Column(name = "source")
+	private String source;
 
-    public Long getId() {
-        return this.id;
-    }
+	// jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Patient id(Long id) {
-        this.setId(id);
-        return this;
-    }
+	public Long getId() {
+		return this.id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Patient id(Long id) {
+		this.setId(id);
+		return this;
+	}
 
-    public String getFirstName() {
-        return this.firstName;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Patient firstName(String firstName) {
-        this.setFirstName(firstName);
-        return this;
-    }
+	public String getFirstName() {
+		return this.firstName;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public Patient firstName(String firstName) {
+		this.setFirstName(firstName);
+		return this;
+	}
 
-    public String getLastName() {
-        return this.lastName;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public Patient lastName(String lastName) {
-        this.setLastName(lastName);
-        return this;
-    }
+	public String getLastName() {
+		return this.lastName;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public Patient lastName(String lastName) {
+		this.setLastName(lastName);
+		return this;
+	}
 
-    public LocalDate getDob() {
-        return this.dob;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public Patient dob(LocalDate dob) {
-        this.setDob(dob);
-        return this;
-    }
+	public LocalDate getDob() {
+		return this.dob;
+	}
 
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
-    }
+	public Patient dob(LocalDate dob) {
+		this.setDob(dob);
+		return this;
+	}
 
-    public String getAge() {
-        return this.age;
-    }
+	public void setDob(LocalDate dob) {
+		this.dob = dob;
+	}
 
-    public Patient age(String age) {
-        this.setAge(age);
-        return this;
-    }
+	public String getAge() {
+		return this.age;
+	}
 
-    public void setAge(String age) {
-        this.age = age;
-    }
+	public Patient age(String age) {
+		this.setAge(age);
+		return this;
+	}
 
-    public String getGender() {
-        return this.gender;
-    }
+	public void setAge(String age) {
+		this.age = age;
+	}
 
-    public Patient gender(String gender) {
-        this.setGender(gender);
-        return this;
-    }
+	public String getGender() {
+		return this.gender;
+	}
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+	public Patient gender(String gender) {
+		this.setGender(gender);
+		return this;
+	}
 
-    public String getPrimaryReferrer() {
-        return this.primaryReferrer;
-    }
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
-    public Patient primaryReferrer(String primaryReferrer) {
-        this.setPrimaryReferrer(primaryReferrer);
-        return this;
-    }
+	public String getPrimaryReferrer() {
+		return this.primaryReferrer;
+	}
 
-    public void setPrimaryReferrer(String primaryReferrer) {
-        this.primaryReferrer = primaryReferrer;
-    }
+	public Patient primaryReferrer(String primaryReferrer) {
+		this.setPrimaryReferrer(primaryReferrer);
+		return this;
+	}
 
-    public String getClientPatientId() {
-        return this.clientPatientId;
-    }
+	public void setPrimaryReferrer(String primaryReferrer) {
+		this.primaryReferrer = primaryReferrer;
+	}
 
-    public Patient clientPatientId(String clientPatientId) {
-        this.setClientPatientId(clientPatientId);
-        return this;
-    }
+	public String getClientPatientId() {
+		return this.clientPatientId;
+	}
 
-    public void setClientPatientId(String clientPatientId) {
-        this.clientPatientId = clientPatientId;
-    }
+	public Patient clientPatientId(String clientPatientId) {
+		this.setClientPatientId(clientPatientId);
+		return this;
+	}
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+	public void setClientPatientId(String clientPatientId) {
+		this.clientPatientId = clientPatientId;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Patient)) {
-            return false;
-        }
-        return id != null && id.equals(((Patient) o).id);
-    }
+	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+	// setters here
 
-    @Override
-    public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-        return getClass().hashCode();
-    }
+	public String getSource() {
+		return source;
+	}
 
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "Patient{" +
-            "id=" + getId() +
-            ", firstName='" + getFirstName() + "'" +
-            ", lastName='" + getLastName() + "'" +
-            ", dob='" + getDob() + "'" +
-            ", age='" + getAge() + "'" +
-            ", gender='" + getGender() + "'" +
-            ", primaryReferrer='" + getPrimaryReferrer() + "'" +
-            ", clientPatientId='" + getClientPatientId() + "'" +
-            "}";
-    }
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof Patient)) {
+			return false;
+		}
+		return id != null && id.equals(((Patient) o).id);
+	}
+
+	@Override
+	public int hashCode() {
+		// see
+		// https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+		return getClass().hashCode();
+	}
+
+	// prettier-ignore
+	@Override
+	public String toString() {
+		return "Patient{" + "id=" + getId() + ", firstName='" + getFirstName() + "'" + ", lastName='" + getLastName()
+				+ "'" + ", dob='" + getDob() + "'" + ", age='" + getAge() + "'" + ", gender='" + getGender() + "'"
+				+ ", primaryReferrer='" + getPrimaryReferrer() + "'" + ", clientPatientId='" + getClientPatientId()
+				+ "'" + "}";
+	}
 }

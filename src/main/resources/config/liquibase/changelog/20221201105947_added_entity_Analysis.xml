@@ -91,6 +91,9 @@
 			<column name="analysis_service_id" type="varchar(255)">
 				<constraints nullable="true" />
 			</column>
+			<column name="source" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
 			<column name="created_by" type="varchar(50)">
 				<constraints nullable="false" />
 			</column>
