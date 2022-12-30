@@ -65,7 +65,7 @@
 			<column name="date_received" type="date">
 				<constraints nullable="true" />
 			</column>
-			<column name="sample_type_alias" type="date">
+			<column name="sample_type_alias" type="varchar(255)">
 				<constraints nullable="true" />
 			</column>
 			<column name="invalidated" type="varchar(255)">
@@ -113,7 +113,7 @@
 			<column name="retry" type="bigint">
 				<constraints nullable="true" />
 			</column>
-			<column name="error_reason" type="bigint">
+			<column name="error_reason" type="varchar(255)">
 				<constraints nullable="true" />
 			</column>
 			<column name="created_by" type="varchar(50)">

@@ -134,8 +134,13 @@ public class PatientServiceImpl implements PatientService {
 				AnalysisRequestAnalysisProfileDTO anDTO = batch.getAnalysisRequest();
 
 				AnalysisRequest sample = new AnalysisRequest();
+				
+				sample.setAnalysisRequestId(UUID.randomUUID().toString());
+				sample.setAnalysisRequestUid(anDTO.getAnalysisRequestUid());
+				
+				sample.setPatientId(savedPatient.getPatientId());
 
-				sample.setPatientId(anDTO.getPatientId());
+				sample.setPatientUid(anDTO.getPatientId());
 				sample.setClientSampleId(anDTO.getClientSampleId());
 				//sample.setClientContact(anDTO.getClientContactName());
 				//sample.setSampleTypeName(anDTO.getSampleTypeName());

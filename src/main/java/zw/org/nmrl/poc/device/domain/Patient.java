@@ -9,12 +9,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import zw.org.nmrl.poc.device.domain.id.PatientId;
 import zw.org.nmrl.poc.device.management.enumeration.Gender;
 
 /**
@@ -40,19 +38,16 @@ public class Patient extends AbstractAuditingEntity implements Serializable {
 	@Column(name = "lab_id")
 	private String labId; // identification
 
-	@NotNull
-	@Column(name = "first_name", nullable = false)
+	@Column(name = "first_name")
 	private String firstName;
 
-	@NotNull
-	@Column(name = "last_name", nullable = false)
+	@Column(name = "last_name")
 	private String lastName;
 
 	@Column(name = "phone_number")
 	private String phoneNumber;
 
-	@NotNull
-	@Column(name = "birth_date", nullable = false)
+	@Column(name = "birth_date")
 	private LocalDate birthDate;
 
 	@Column(name = "consent_to_sms")
@@ -65,8 +60,7 @@ public class Patient extends AbstractAuditingEntity implements Serializable {
 	@Column(name = "gender")
 	private Gender gender;
 
-	@NotNull
-	@Column(name = "client_patient_id", nullable = false)
+	@Column(name = "client_patient_id")
 	private String clientPatientId;
 
 	@Column(name = "primary_referrer_id")
