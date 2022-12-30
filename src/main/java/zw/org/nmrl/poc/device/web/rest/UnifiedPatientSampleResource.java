@@ -71,13 +71,13 @@ public class UnifiedPatientSampleResource {
     @PostMapping("/unified-patient-sample")
     public ResponseEntity<Patient> createPatient(@RequestBody Patient patient) throws URISyntaxException {
         log.debug("REST request to save Patient : {}", patient);
-        if (patient.getId() != null) {
+        if (patient.getPatientId() != null) {
             throw new BadRequestAlertException("A new patient cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Patient result = patientService.save(patient);
         return ResponseEntity
-            .created(new URI("/api/patients/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .created(new URI("/api/patients/" + result.getPatientId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getPatientId().toString()))
             .body(result);
     }
 
@@ -95,21 +95,22 @@ public class UnifiedPatientSampleResource {
     public ResponseEntity<Patient> updatePatient(@PathVariable(value = "id", required = false) final Long id, @RequestBody Patient patient)
         throws URISyntaxException {
         log.debug("REST request to update Patient : {}, {}", id, patient);
-        if (patient.getId() == null) {
+        if (patient.getPatientId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, patient.getId())) {
+        if (!Objects.equals(id, patient.getPatientId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        if (!patientRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
+		/*
+		 * if (!patientRepository.existsById(id)) { throw new
+		 * BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound"); }
+		 */
 
         Patient result = patientService.update(patient);
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, patient.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, patient.getPatientId().toString()))
             .body(result);
     }
 
@@ -130,22 +131,23 @@ public class UnifiedPatientSampleResource {
         @RequestBody Patient patient
     ) throws URISyntaxException {
         log.debug("REST request to partial update Patient partially : {}, {}", id, patient);
-        if (patient.getId() == null) {
+        if (patient.getPatientId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, patient.getId())) {
+        if (!Objects.equals(id, patient.getPatientId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        if (!patientRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
+		/*
+		 * if (!patientRepository.existsById(id)) { throw new
+		 * BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound"); }
+		 */
 
         Optional<Patient> result = patientService.partialUpdate(patient);
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, patient.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, patient.getPatientId().toString())
         );
     }
 
@@ -225,7 +227,7 @@ public class UnifiedPatientSampleResource {
         Patient result = patientService.saveBatch(batch);
         return ResponseEntity
             .created(new URI("/api/patients/"))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getPatientId().toString()))
             .body(result);
     }
 }

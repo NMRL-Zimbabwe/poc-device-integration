@@ -2,72 +2,93 @@ package zw.org.nmrl.poc.device.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import zw.org.nmrl.poc.device.domain.id.PatientId;
+import zw.org.nmrl.poc.device.management.enumeration.Gender;
+
 /**
- * A Patient.
+ * The Patient entity.
  */
 @Entity
 @Table(name = "patient")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@SuppressWarnings("common-java:DuplicatedBlocks")
-public class Patient implements Serializable {
-
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+public class Patient extends AbstractAuditingEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-	@SequenceGenerator(name = "sequenceGenerator")
-	@Column(name = "id")
-	private Long id;
+	@Column(name = "patient_id", unique = true, nullable = false)
+	private String patientId;
 
-	@Column(name = "first_name")
+	@Column(name = "patient_uid")
+	private String patientUid;
+
+	private Boolean anonymous;
+
+	private String source;
+
+	@Column(name = "lab_id")
+	private String labId; // identification
+
+	@NotNull
+	@Column(name = "first_name", nullable = false)
 	private String firstName;
 
-	@Column(name = "last_name")
+	@NotNull
+	@Column(name = "last_name", nullable = false)
 	private String lastName;
 
-	@Column(name = "dob")
-	private LocalDate dob;
+	@Column(name = "phone_number")
+	private String phoneNumber;
 
-	@Column(name = "age")
-	private String age;
+	@NotNull
+	@Column(name = "birth_date", nullable = false)
+	private LocalDate birthDate;
 
+	@Column(name = "consent_to_sms")
+	private Boolean consentToSMS;
+
+	@Column(name = "birth_date_estimated")
+	private Boolean birthDateEstimated;
+
+	@Enumerated(EnumType.STRING)
 	@Column(name = "gender")
-	private String gender;
+	private Gender gender;
 
-	@Column(name = "primary_referrer")
-	private String primaryReferrer;
-
-	@Column(name = "client_patient_id")
+	@NotNull
+	@Column(name = "client_patient_id", nullable = false)
 	private String clientPatientId;
 
-	@Column(name = "source")
-	private String source;
+	@Column(name = "primary_referrer_id")
+	private String primaryReferrerId; // client
+
+	@Column(name = "primary_referrer")
+	private String primaryReferrer; // client
+
+	private int retry;
 
 	// jhipster-needle-entity-add-field - JHipster will add fields here
 
-	public Long getId() {
-		return this.id;
-	}
-
-	public Patient id(Long id) {
-		this.setId(id);
-		return this;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getFirstName() {
-		return this.firstName;
+		return firstName;
+	}
+
+	public Boolean getConsentToSMS() {
+		return consentToSMS;
 	}
 
 	public Patient firstName(String firstName) {
-		this.setFirstName(firstName);
+		this.firstName = firstName;
 		return this;
 	}
 
@@ -76,11 +97,11 @@ public class Patient implements Serializable {
 	}
 
 	public String getLastName() {
-		return this.lastName;
+		return lastName;
 	}
 
 	public Patient lastName(String lastName) {
-		this.setLastName(lastName);
+		this.lastName = lastName;
 		return this;
 	}
 
@@ -88,64 +109,64 @@ public class Patient implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public LocalDate getDob() {
-		return this.dob;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public Patient dob(LocalDate dob) {
-		this.setDob(dob);
+	public Patient phoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 		return this;
 	}
 
-	public void setDob(LocalDate dob) {
-		this.dob = dob;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
-	public String getAge() {
-		return this.age;
+	public LocalDate getBirthDate() {
+		return birthDate;
 	}
 
-	public Patient age(String age) {
-		this.setAge(age);
+	public Patient birthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
 		return this;
 	}
 
-	public void setAge(String age) {
-		this.age = age;
+	public void setBirthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
 	}
 
-	public String getGender() {
-		return this.gender;
+	public Boolean isConsentToSMS() {
+		return consentToSMS;
 	}
 
-	public Patient gender(String gender) {
-		this.setGender(gender);
+	public Patient consentToSMS(Boolean consentToSMS) {
+		this.consentToSMS = consentToSMS;
 		return this;
 	}
 
-	public void setGender(String gender) {
+	public void setConsentToSMS(Boolean consentToSMS) {
+		this.consentToSMS = consentToSMS;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public Patient gender(Gender gender) {
+		this.gender = gender;
+		return this;
+	}
+
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 
-	public String getPrimaryReferrer() {
-		return this.primaryReferrer;
-	}
-
-	public Patient primaryReferrer(String primaryReferrer) {
-		this.setPrimaryReferrer(primaryReferrer);
-		return this;
-	}
-
-	public void setPrimaryReferrer(String primaryReferrer) {
-		this.primaryReferrer = primaryReferrer;
-	}
-
 	public String getClientPatientId() {
-		return this.clientPatientId;
+		return clientPatientId;
 	}
 
 	public Patient clientPatientId(String clientPatientId) {
-		this.setClientPatientId(clientPatientId);
+		this.clientPatientId = clientPatientId;
 		return this;
 	}
 
@@ -153,15 +174,36 @@ public class Patient implements Serializable {
 		this.clientPatientId = clientPatientId;
 	}
 
-	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
-	// setters here
-
 	public String getSource() {
 		return source;
 	}
 
 	public void setSource(String source) {
 		this.source = source;
+	}
+
+	public String getLabId() {
+		return labId;
+	}
+
+	public void setLabId(String labId) {
+		this.labId = labId;
+	}
+
+	public Boolean getBirthDateEstimated() {
+		return birthDateEstimated;
+	}
+
+	public void setBirthDateEstimated(Boolean birthDateEstimated) {
+		this.birthDateEstimated = birthDateEstimated;
+	}
+
+	public Boolean getAnonymous() {
+		return anonymous;
+	}
+
+	public void setAnonymous(Boolean anonymous) {
+		this.anonymous = anonymous;
 	}
 
 	@Override
@@ -172,22 +214,62 @@ public class Patient implements Serializable {
 		if (!(o instanceof Patient)) {
 			return false;
 		}
-		return id != null && id.equals(((Patient) o).id);
+		return patientId != null && patientId.equals(((Patient) o).patientId);
+	}
+
+	public String getPrimaryReferrer() {
+		return primaryReferrer;
+	}
+
+	public void setPrimaryReferrer(String primaryReferrer) {
+		this.primaryReferrer = primaryReferrer;
 	}
 
 	@Override
 	public int hashCode() {
-		// see
-		// https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-		return getClass().hashCode();
+		return 31;
 	}
 
-	// prettier-ignore
+	public String getPrimaryReferrerId() {
+		return primaryReferrerId;
+	}
+
+	public void setPrimaryReferrerId(String primaryReferrerId) {
+		this.primaryReferrerId = primaryReferrerId;
+	}
+
+	public String getPatientId() {
+		return patientId;
+	}
+
+	public void setPatientId(String patientId) {
+		this.patientId = patientId;
+	}
+
+	public String getPatientUid() {
+		return patientUid;
+	}
+
+	public void setPatientUid(String patientUid) {
+		this.patientUid = patientUid;
+	}
+
+	public int getRetry() {
+		return retry;
+	}
+
+	public void setRetry(int retry) {
+		this.retry = retry;
+	}
+
 	@Override
 	public String toString() {
-		return "Patient{" + "id=" + getId() + ", firstName='" + getFirstName() + "'" + ", lastName='" + getLastName()
-				+ "'" + ", dob='" + getDob() + "'" + ", age='" + getAge() + "'" + ", gender='" + getGender() + "'"
-				+ ", primaryReferrer='" + getPrimaryReferrer() + "'" + ", clientPatientId='" + getClientPatientId()
-				+ "'" + "}";
+		return "Patient [patientId=" + patientId + ", patientUid=" + patientUid + ", anonymous=" + anonymous
+				+ ", source=" + source + ", labId=" + labId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", phoneNumber=" + phoneNumber + ", birthDate=" + birthDate + ", consentToSMS=" + consentToSMS
+				+ ", birthDateEstimated=" + birthDateEstimated + ", gender=" + gender + ", clientPatientId="
+				+ clientPatientId + ", primaryReferrerId=" + primaryReferrerId + ", primaryReferrer=" + primaryReferrer
+				+ "]";
 	}
+
 }

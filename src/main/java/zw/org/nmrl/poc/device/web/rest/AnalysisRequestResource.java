@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,26 +13,35 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
-import zw.org.nmrl.poc.device.domain.Sample;
-import zw.org.nmrl.poc.device.repository.SampleRepository;
-import zw.org.nmrl.poc.device.service.SampleQueryService;
+import zw.org.nmrl.poc.device.domain.AnalysisRequest;
+import zw.org.nmrl.poc.device.repository.AnalysisRequestRepository;
+import zw.org.nmrl.poc.device.service.AnalysisRequestQueryService;
 import zw.org.nmrl.poc.device.service.SampleService;
-import zw.org.nmrl.poc.device.service.criteria.SampleCriteria;
+import zw.org.nmrl.poc.device.service.criteria.AnalysisRequestCriteria;
 import zw.org.nmrl.poc.device.web.rest.errors.BadRequestAlertException;
 
 /**
- * REST controller for managing {@link zw.org.nmrl.poc.device.domain.Sample}.
+ * REST controller for managing {@link zw.org.nmrl.poc.device.domain.AnalysisRequest}.
  */
 @RestController
 @RequestMapping("/api")
-public class SampleResource {
+public class AnalysisRequestResource {
 
-    private final Logger log = LoggerFactory.getLogger(SampleResource.class);
+    private final Logger log = LoggerFactory.getLogger(AnalysisRequestResource.class);
 
     private static final String ENTITY_NAME = "sample";
 
@@ -40,11 +50,11 @@ public class SampleResource {
 
     private final SampleService sampleService;
 
-    private final SampleRepository sampleRepository;
+    private final AnalysisRequestRepository sampleRepository;
 
-    private final SampleQueryService sampleQueryService;
+    private final AnalysisRequestQueryService sampleQueryService;
 
-    public SampleResource(SampleService sampleService, SampleRepository sampleRepository, SampleQueryService sampleQueryService) {
+    public AnalysisRequestResource(SampleService sampleService, AnalysisRequestRepository sampleRepository, AnalysisRequestQueryService sampleQueryService) {
         this.sampleService = sampleService;
         this.sampleRepository = sampleRepository;
         this.sampleQueryService = sampleQueryService;
@@ -58,15 +68,15 @@ public class SampleResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/samples")
-    public ResponseEntity<Sample> createSample(@RequestBody Sample sample) throws URISyntaxException {
+    public ResponseEntity<AnalysisRequest> createSample(@RequestBody AnalysisRequest sample) throws URISyntaxException {
         log.debug("REST request to save Sample : {}", sample);
-        if (sample.getId() != null) {
+        if (sample.getAnalysisRequestId() != null) {
             throw new BadRequestAlertException("A new sample cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Sample result = sampleService.save(sample);
+        AnalysisRequest result = sampleService.save(sample);
         return ResponseEntity
-            .created(new URI("/api/samples/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .created(new URI("/api/samples/" + result.getAnalysisRequestId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getAnalysisRequestId().toString()))
             .body(result);
     }
 
@@ -81,24 +91,24 @@ public class SampleResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/samples/{id}")
-    public ResponseEntity<Sample> updateSample(@PathVariable(value = "id", required = false) final Long id, @RequestBody Sample sample)
+    public ResponseEntity<AnalysisRequest> updateSample(@PathVariable(value = "id", required = false) final Long id, @RequestBody AnalysisRequest sample)
         throws URISyntaxException {
         log.debug("REST request to update Sample : {}, {}", id, sample);
-        if (sample.getId() == null) {
+        if (sample.getAnalysisRequestId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, sample.getId())) {
+        if (!Objects.equals(id, sample.getAnalysisRequestId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
+		/*
+		 * if (!sampleRepository.existsById(id)) { throw new
+		 * BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound"); }
+		 */
 
-        if (!sampleRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Sample result = sampleService.update(sample);
+        AnalysisRequest result = sampleService.update(sample);
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, sample.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, sample.getAnalysisRequestId().toString()))
             .body(result);
     }
 
@@ -114,27 +124,28 @@ public class SampleResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/samples/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    public ResponseEntity<Sample> partialUpdateSample(
+    public ResponseEntity<AnalysisRequest> partialUpdateSample(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody Sample sample
+        @RequestBody AnalysisRequest sample
     ) throws URISyntaxException {
         log.debug("REST request to partial update Sample partially : {}, {}", id, sample);
-        if (sample.getId() == null) {
+        if (sample.getAnalysisRequestId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, sample.getId())) {
+        if (!Objects.equals(id, sample.getAnalysisRequestId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        if (!sampleRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
+		/*
+		 * if (!sampleRepository.existsById(id)) { throw new
+		 * BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound"); }
+		 */
 
-        Optional<Sample> result = sampleService.partialUpdate(sample);
+        Optional<AnalysisRequest> result = sampleService.partialUpdate(sample);
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, sample.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, sample.getAnalysisRequestId().toString())
         );
     }
 
@@ -146,12 +157,12 @@ public class SampleResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of samples in body.
      */
     @GetMapping("/samples")
-    public ResponseEntity<List<Sample>> getAllSamples(
-        SampleCriteria criteria,
+    public ResponseEntity<List<AnalysisRequest>> getAllSamples(
+        AnalysisRequestCriteria criteria,
         @org.springdoc.api.annotations.ParameterObject Pageable pageable
     ) {
         log.debug("REST request to get Samples by criteria: {}", criteria);
-        Page<Sample> page = sampleQueryService.findByCriteria(criteria, pageable);
+        Page<AnalysisRequest> page = sampleQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -163,7 +174,7 @@ public class SampleResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
      */
     @GetMapping("/samples/count")
-    public ResponseEntity<Long> countSamples(SampleCriteria criteria) {
+    public ResponseEntity<Long> countSamples(AnalysisRequestCriteria criteria) {
         log.debug("REST request to count Samples by criteria: {}", criteria);
         return ResponseEntity.ok().body(sampleQueryService.countByCriteria(criteria));
     }
@@ -175,9 +186,9 @@ public class SampleResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the sample, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/samples/{id}")
-    public ResponseEntity<Sample> getSample(@PathVariable Long id) {
+    public ResponseEntity<AnalysisRequest> getSample(@PathVariable Long id) {
         log.debug("REST request to get Sample : {}", id);
-        Optional<Sample> sample = sampleService.findOne(id);
+        Optional<AnalysisRequest> sample = sampleService.findOne(id);
         return ResponseUtil.wrapOrNotFound(sample);
     }
 

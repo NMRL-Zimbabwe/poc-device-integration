@@ -7,8 +7,8 @@ import tech.jhipster.service.Criteria;
 import tech.jhipster.service.filter.*;
 
 /**
- * Criteria class for the {@link zw.org.nmrl.poc.device.domain.Sample} entity. This class is used
- * in {@link zw.org.nmrl.poc.device.web.rest.SampleResource} to receive all the possible filtering options from
+ * Criteria class for the {@link zw.org.nmrl.poc.device.domain.AnalysisRequest} entity. This class is used
+ * in {@link zw.org.nmrl.poc.device.web.rest.AnalysisRequestResource} to receive all the possible filtering options from
  * the Http GET request parameters.
  * For example the following could be a valid request:
  * {@code /samples?id.greaterThan=5&attr1.contains=something&attr2.specified=false}
@@ -17,7 +17,7 @@ import tech.jhipster.service.filter.*;
  */
 @ParameterObject
 @SuppressWarnings("common-java:DuplicatedBlocks")
-public class SampleCriteria implements Serializable, Criteria {
+public class AnalysisRequestCriteria implements Serializable, Criteria {
 
     private static final long serialVersionUID = 1L;
 
@@ -53,9 +53,9 @@ public class SampleCriteria implements Serializable, Criteria {
 
     private Boolean distinct;
 
-    public SampleCriteria() {}
+    public AnalysisRequestCriteria() {}
 
-    public SampleCriteria(SampleCriteria other) {
+    public AnalysisRequestCriteria(AnalysisRequestCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.patientId = other.patientId == null ? null : other.patientId.copy();
         this.clientSampleId = other.clientSampleId == null ? null : other.clientSampleId.copy();
@@ -75,8 +75,8 @@ public class SampleCriteria implements Serializable, Criteria {
     }
 
     @Override
-    public SampleCriteria copy() {
-        return new SampleCriteria(this);
+    public AnalysisRequestCriteria copy() {
+        return new AnalysisRequestCriteria(this);
     }
 
     public LongFilter getId() {
@@ -320,7 +320,7 @@ public class SampleCriteria implements Serializable, Criteria {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        final SampleCriteria that = (SampleCriteria) o;
+        final AnalysisRequestCriteria that = (AnalysisRequestCriteria) o;
         return (
             Objects.equals(id, that.id) &&
             Objects.equals(patientId, that.patientId) &&

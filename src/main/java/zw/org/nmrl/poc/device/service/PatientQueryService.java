@@ -79,11 +79,12 @@ public class PatientQueryService extends QueryService<Patient> {
         Specification<Patient> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
+        	/**
             if (criteria.getDistinct() != null) {
                 specification = specification.and(distinct(criteria.getDistinct()));
             }
             if (criteria.getId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getId(), Patient_.id));
+                specification = specification.and(buildRangeSpecification(criteria.getId(), Patient_.patientId));
             }
             if (criteria.getFirstName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getFirstName(), Patient_.firstName));
@@ -105,7 +106,7 @@ public class PatientQueryService extends QueryService<Patient> {
             }
             if (criteria.getClientPatientId() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getClientPatientId(), Patient_.clientPatientId));
-            }
+            }**/
         }
         return specification;
     }

@@ -82,15 +82,15 @@ public class AnalysisServiceQueryService extends QueryService<AnalysisService> {
             if (criteria.getDistinct() != null) {
                 specification = specification.and(distinct(criteria.getDistinct()));
             }
-            if (criteria.getId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getId(), AnalysisService_.id));
-            }
-            if (criteria.getName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getName(), AnalysisService_.name));
-            }
-            if (criteria.getUnit() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getUnit(), AnalysisService_.unit));
-            }
+			/*
+			 * if (criteria.getId() != null) { specification =
+			 * specification.and(buildRangeSpecification(criteria.getId(),
+			 * AnalysisService_.id)); } if (criteria.getName() != null) { specification =
+			 * specification.and(buildStringSpecification(criteria.getName(),
+			 * AnalysisService_.name)); } if (criteria.getUnit() != null) { specification =
+			 * specification.and(buildStringSpecification(criteria.getUnit(),
+			 * AnalysisService_.unit)); }
+			 */
         }
         return specification;
     }

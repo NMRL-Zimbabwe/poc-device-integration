@@ -10,36 +10,69 @@
         Added the entity Patient.
     -->
     <changeSet id="20221201105942-1" author="jhipster">
-        <createTable tableName="patient">
-            <column name="id" type="bigint">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="first_name" type="varchar(255)">
+    <createTable tableName="patient"
+			remarks="The Patient entity.">
+			<column name="patient_id" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="patient_uid" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="anonymous" type="boolean">
+				<constraints nullable="true" />
+			</column>
+			<column name="source" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="lab_id" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="first_name" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="last_name" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="phone_number" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="birth_date" type="date">
+				<constraints nullable="true" />
+			</column>
+			<column name="consent_to_sms" type="boolean">
+				<constraints nullable="true" />
+			</column>
+			<column name="birth_date_estimated" type="boolean">
+				<constraints nullable="true" />
+			</column>
+			<column name="gender" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="primary_referrer_id" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			 <column name="primary_referrer" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="last_name" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="dob" type="date">
-                <constraints nullable="true" />
-            </column>
-            <column name="age" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="gender" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="primary_referrer" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="client_patient_id" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="source" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
-        </createTable>
+			<column name="client_patient_id" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="sync" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="retry" type="bigint">
+				<constraints nullable="true" />
+			</column>
+			<column name="error_reason" type="bigint">
+				<constraints nullable="true" />
+			</column>
+			<column name="created_by" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_date" type="timestamp" />
+			<column name="last_modified_by" type="varchar(50)" />
+			<column name="last_modified_date" type="timestamp" />
+		</createTable>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

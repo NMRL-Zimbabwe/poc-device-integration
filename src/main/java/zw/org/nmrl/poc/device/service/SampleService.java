@@ -3,10 +3,10 @@ package zw.org.nmrl.poc.device.service;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import zw.org.nmrl.poc.device.domain.Sample;
+import zw.org.nmrl.poc.device.domain.AnalysisRequest;
 
 /**
- * Service Interface for managing {@link Sample}.
+ * Service Interface for managing {@link AnalysisRequest}.
  */
 public interface SampleService {
     /**
@@ -15,7 +15,7 @@ public interface SampleService {
      * @param sample the entity to save.
      * @return the persisted entity.
      */
-    Sample save(Sample sample);
+    AnalysisRequest save(AnalysisRequest sample);
 
     /**
      * Updates a sample.
@@ -23,7 +23,7 @@ public interface SampleService {
      * @param sample the entity to update.
      * @return the persisted entity.
      */
-    Sample update(Sample sample);
+    AnalysisRequest update(AnalysisRequest sample);
 
     /**
      * Partially updates a sample.
@@ -31,7 +31,7 @@ public interface SampleService {
      * @param sample the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<Sample> partialUpdate(Sample sample);
+    Optional<AnalysisRequest> partialUpdate(AnalysisRequest sample);
 
     /**
      * Get all the samples.
@@ -39,7 +39,7 @@ public interface SampleService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<Sample> findAll(Pageable pageable);
+    Page<AnalysisRequest> findAll(Pageable pageable);
 
     /**
      * Get the "id" sample.
@@ -47,7 +47,7 @@ public interface SampleService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<Sample> findOne(Long id);
+    Optional<AnalysisRequest> findOne(Long id);
 
     /**
      * Delete the "id" sample.

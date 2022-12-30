@@ -13,6 +13,7 @@ import zw.org.nmrl.poc.device.management.enumeration.Gender;
  * A DTO representing a patient, with his authorities.
  */
 public class PatientDTO {
+	
     private String patientId;
 
     private String patientUid;

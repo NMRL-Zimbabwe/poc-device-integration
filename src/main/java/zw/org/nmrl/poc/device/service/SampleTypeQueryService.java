@@ -82,12 +82,13 @@ public class SampleTypeQueryService extends QueryService<SampleType> {
             if (criteria.getDistinct() != null) {
                 specification = specification.and(distinct(criteria.getDistinct()));
             }
-            if (criteria.getId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getId(), SampleType_.id));
-            }
-            if (criteria.getName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getName(), SampleType_.name));
-            }
+			/*
+			 * if (criteria.getId() != null) { specification =
+			 * specification.and(buildRangeSpecification(criteria.getId(), SampleType_.id));
+			 * } if (criteria.getName() != null) { specification =
+			 * specification.and(buildStringSpecification(criteria.getName(),
+			 * SampleType_.name)); }
+			 */
         }
         return specification;
     }

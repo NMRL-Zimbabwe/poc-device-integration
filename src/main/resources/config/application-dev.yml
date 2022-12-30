@@ -106,3 +106,12 @@ jhipster:
 # ===================================================================
 
 # application:
+
+# Rabbitmq settings for senaite
+spring.rabbitmq.host: 192.168.0.40
+#spring.rabbitmq.port: 5672
+spring.rabbitmq.port: 4056
+spring.rabbitmq.username: guest
+spring.rabbitmq.password: guest
+spring.rabbitmq.virtualHost: /
+spring.rabbitmq.routingKey: amq.direct
