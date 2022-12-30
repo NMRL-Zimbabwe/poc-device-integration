@@ -49,13 +49,13 @@ public class SendToCentralRepoService {
 	@Qualifier(value = "centralRepository")
 	private AmqpTemplate amqpTemplate;
 
-	public void sendMessageToLims(UnifiedPatientSampleCaseAnalysisDTO message, String destination)
+	public void sendMessageToLims(UnifiedPatientSampleCaseAnalysisDTO message, String routingKey)
 			throws JsonProcessingException {
 		System.out.println("[******] Waiting for messages.");
 
 		ObjectMapper mapper = new ObjectMapper();
 		Object jsonMessage = mapper.writeValueAsString(message);
-		amqpTemplate.convertAndSend("poc.device", destination, jsonMessage.toString());
+		amqpTemplate.convertAndSend("amq.direct", "pocWeb", jsonMessage.toString());
 		// amqpTemplate.convertAndSend(jsonMessage);
 
 	}
@@ -70,6 +70,8 @@ public class SendToCentralRepoService {
 		int retry = 4;
 		List<AnalysisRequest> sendToLims = sampleRepository.findBySyncIsNullAndRetryLessThan(retry);
 		for (AnalysisRequest request : sendToLims) {
+			log.info("AnalysisRequest found ******* :{}", request );
+			
 			Optional<Patient> isPatient = patientRepository.findByPatientIdAndPatientUidAndRetryLessThan(
 					request.getPatientId(), request.getPatientUid(), retry);
 
@@ -95,12 +97,15 @@ public class SendToCentralRepoService {
 			 * log.error("UNKNOWN Laboratory :{}", request.getLabId()); }
 			 * flushOurErrorsFromQueue(request, "UNKNOWN Laboratory"); return; }
 			 **/
+			
+			log.info("Patient found ******* :{}", request );
+			
 			PatientDTO pt = new PatientDTO();
 
 			pt.setFirstName(patient.getFirstName());
 			pt.setLastName(patient.getLastName());
 			pt.setClientPatientId(patient.getClientPatientId());
-			pt.setBirthDate(patient.getBirthDate());
+			//pt.setBirthDate(patient.getBirthDate());
 			pt.setBirthDateEstimated(patient.getBirthDateEstimated());
 			pt.setGender(patient.getGender());
 			pt.setPrimaryReferrer(patient.getPrimaryReferrer());
@@ -120,7 +125,7 @@ public class SendToCentralRepoService {
 			analysisRequest.setAnalysisRequestId(UUID.randomUUID().toString());
 			analysisRequest.setAnalysisRequestUid(request.getAnalysisRequestUid());
 
-			analysisRequest.setDateCollected(request.getDateCollected());
+			//analysisRequest.setDateCollected(request.getDateCollected());
 			
 			analysisRequest.setPatientId(request.getPatientId());
 			analysisRequest.setPatientUid(request.getPatientUid());
@@ -133,11 +138,12 @@ public class SendToCentralRepoService {
 
 			// The code below will be substituted with the bundled request
 
-			String destination = "poc";
+			String routingKey = "pocWeb";
 
 			if (unifiedLimsRequest.getPatient().getClientPatientId() != null) {
-				sendMessageToLims(unifiedLimsRequest, destination); // Flag sent request as sent to Central Repo
-				request.setSentToLims(LaboratoryRequestStatus.SENT_TO_CENTRAL_REPOSITORY.toString());
+				log.info("Sending to Central repo found ******* :{}", request );
+				sendMessageToLims(unifiedLimsRequest, routingKey); // Flag sent request as sent to Central Repo
+				request.setSync(LaboratoryRequestStatus.SENT_TO_CENTRAL_REPOSITORY.toString());
 
 				// TODO move the persistence process to a service
 				sampleRepository.save(request);

@@ -120,7 +120,9 @@ public class PatientServiceImpl implements PatientService {
 			
 			Patient pt = new Patient();
 			pt.setPatientId(UUID.randomUUID().toString());
+			pt.setPatientUid(ptDTO.getPatientUid());
 			
+			pt.setClientPatientId(ptDTO.getClientPatientId());
 			pt.setFirstName(ptDTO.getFirstName());
 			pt.setLastName(ptDTO.getLastName());
 			pt.setBirthDate(ptDTO.getBirthDate());
