@@ -76,7 +76,7 @@ public class PatientServiceImpl implements PatientService {
 			if (patient.getBirthDate() != null) {
 				existingPatient.setBirthDate(patient.getBirthDate());
 			}
-			
+
 			if (patient.getGender() != null) {
 				existingPatient.setGender(patient.getGender());
 			}
@@ -102,26 +102,26 @@ public class PatientServiceImpl implements PatientService {
 	@Transactional(readOnly = true)
 	public Optional<Patient> findOne(Long id) {
 		log.debug("Request to get Patient : {}", id);
-		return null; //patientRepository.findById(id);
+		return null; // patientRepository.findById(id);
 	}
 
 	@Override
 	public void delete(Long id) {
 		log.debug("Request to delete Patient : {}", id);
-		//patientRepository.deleteById(id);
+		// patientRepository.deleteById(id);
 	}
 
 	@Override
 	public Patient saveBatch(UnifiedPatientSampleCaseAnalysisDTO batch) {
 		Patient savedPatient = null;
 		if (batch.getPatient() != null) {
-			
+
 			PatientDTO ptDTO = batch.getPatient();
-			
+
 			Patient pt = new Patient();
 			pt.setPatientId(UUID.randomUUID().toString());
 			pt.setPatientUid(ptDTO.getPatientUid());
-			
+
 			pt.setClientPatientId(ptDTO.getClientPatientId());
 			pt.setFirstName(ptDTO.getFirstName());
 			pt.setLastName(ptDTO.getLastName());
@@ -136,21 +136,21 @@ public class PatientServiceImpl implements PatientService {
 				AnalysisRequestAnalysisProfileDTO anDTO = batch.getAnalysisRequest();
 
 				AnalysisRequest sample = new AnalysisRequest();
-				
+
 				sample.setAnalysisRequestId(UUID.randomUUID().toString());
 				sample.setAnalysisRequestUid(anDTO.getAnalysisRequestUid());
-				
+
 				sample.setPatientId(savedPatient.getPatientId());
 
 				sample.setPatientUid(anDTO.getPatientId());
 				sample.setClientSampleId(anDTO.getClientSampleId());
-				//sample.setClientContact(anDTO.getClientContactName());
-				//sample.setSampleTypeName(anDTO.getSampleTypeName());
+				// sample.setClientContact(anDTO.getClientContactName());
+				// sample.setSampleTypeName(anDTO.getSampleTypeName());
 				sample.setDateCollected(anDTO.getDateCollected());
 				sample.setDateRegistered(anDTO.getDateRegistered());
-				//sample.setDateTested(anDTO.getDateTested());
+				// sample.setDateTested(anDTO.getDateTested());
 				sample.setDatePublished(anDTO.getDatePublished());
-				//sample.setState(anDTO.getReviewState());
+				// sample.setState(anDTO.getReviewState());
 				sample.setSource(anDTO.getSource());
 
 				AnalysisRequest savedSam = sampleRepository.save(sample);
@@ -160,8 +160,10 @@ public class PatientServiceImpl implements PatientService {
 					for (AnalysisDTO analysisDTO : batch.getAnalysisRequest().getAnalyses()) {
 
 						Analysis an = new Analysis();
-						an.setAnalysisId(new AnalysisId(analysisDTO.getAnalysisId(), UUID.randomUUID().toString()));
+						an.setAnalysisId(UUID.randomUUID().toString());
 						
+						an.setAnalysisUid(analysisDTO.getAnalysisUid());
+
 						an.setAnalysisRequestId(analysisDTO.getAnalysisRequestId());
 						an.setAnalysisRequestUid(analysisDTO.getAnalysisRequestUid());
 						an.setLabId(anDTO.getLabId());

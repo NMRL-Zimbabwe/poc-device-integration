@@ -15,10 +15,8 @@ import zw.org.nmrl.poc.device.domain.id.AnalysisId;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface AnalysisRepository extends JpaRepository<Analysis, AnalysisId> {
+public interface AnalysisRepository extends JpaRepository<Analysis, String> {
     List<Analysis> findTop8ByWorksheetNumberIsNull();
-
-    Page<Analysis> findAllByAnalysisIdAnalysisUid(Pageable pageable, String laboratoryRequestId);
 
     Page<Analysis> findAllByWorksheetNumber(Pageable pageable, String worksheetNumber);
 

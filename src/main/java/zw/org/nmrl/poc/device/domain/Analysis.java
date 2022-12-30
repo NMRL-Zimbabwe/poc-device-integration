@@ -8,6 +8,7 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
@@ -25,10 +26,12 @@ import zw.org.nmrl.poc.device.domain.id.AnalysisId;
 public class Analysis extends AbstractAuditingEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	@AttributeOverrides({ @AttributeOverride(name = "analysisId", column = @Column(name = "analysis_id")),
-			@AttributeOverride(name = "analysisUid", column = @Column(name = "analysis_uid")), })
-	private AnalysisId analysisId;
+	@Id
+	@Column(name = "analysis_id", unique = true, nullable = false)
+	private String analysisId;
+
+	@Column(name = "analysis_uid")
+	private String analysisUid;
 
 	@Column(name = "analysis_request_id")
 	private String analysisRequestId;
@@ -103,11 +106,11 @@ public class Analysis extends AbstractAuditingEntity implements Serializable {
 		return result;
 	}
 
-	public AnalysisId getAnalysisId() {
+	public String getAnalysisId() {
 		return analysisId;
 	}
 
-	public void setAnalysisId(AnalysisId analysisId) {
+	public void setAnalysisId(String analysisId) {
 		this.analysisId = analysisId;
 	}
 
@@ -380,6 +383,14 @@ public class Analysis extends AbstractAuditingEntity implements Serializable {
 		this.source = source;
 	}
 
+	public String getAnalysisUid() {
+		return analysisUid;
+	}
+
+	public void setAnalysisUid(String analysisUid) {
+		this.analysisUid = analysisUid;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -398,14 +409,15 @@ public class Analysis extends AbstractAuditingEntity implements Serializable {
 
 	@Override
 	public String toString() {
-		return ("Analysis [analysisId=" + analysisId + ", analysisRequestId=" + analysisRequestId
-				+ ", analysisRequestUid=" + analysisRequestUid + ", labId=" + labId + ", result=" + result
-				+ ", dateTested=" + dateTested + ", status=" + status + ", reviewState=" + reviewState + ", analyst="
-				+ analyst + ", reviewer=" + reviewer + ", remarks=" + remarks + ", method=" + method + ", instrument="
-				+ instrument + ", submitter=" + submitter + ", hidden=" + hidden + ", retest=" + retest + ", retestOf="
-				+ retestOf + ", worksheetNumber=" + worksheetNumber + ", title=" + title + ", modified=" + modified
-				+ ", unit=" + unit + ", resultCaptureDate=" + resultCaptureDate + ", analysisServiceId="
-				+ analysisServiceId + ", interpretedResult=" + interpretedResult + "]");
+		return "Analysis [analysisId=" + analysisId + ", analysisUid=" + analysisUid + ", analysisRequestId="
+				+ analysisRequestId + ", analysisRequestUid=" + analysisRequestUid + ", labId=" + labId + ", result="
+				+ result + ", dateTested=" + dateTested + ", status=" + status + ", reviewState=" + reviewState
+				+ ", analyst=" + analyst + ", reviewer=" + reviewer + ", remarks=" + remarks + ", method=" + method
+				+ ", instrument=" + instrument + ", submitter=" + submitter + ", hidden=" + hidden + ", retest="
+				+ retest + ", retestOf=" + retestOf + ", worksheetNumber=" + worksheetNumber + ", title=" + title
+				+ ", modified=" + modified + ", unit=" + unit + ", resultCaptureDate=" + resultCaptureDate
+				+ ", analysisServiceId=" + analysisServiceId + ", interpretedResult=" + interpretedResult + ", source="
+				+ source + "]";
 	}
 
 }
