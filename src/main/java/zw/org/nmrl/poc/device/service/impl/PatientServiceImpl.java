@@ -164,8 +164,9 @@ public class PatientServiceImpl implements PatientService {
 						
 						an.setAnalysisUid(analysisDTO.getAnalysisUid());
 
-						an.setAnalysisRequestId(analysisDTO.getAnalysisRequestId());
+						an.setAnalysisRequestId(savedSam.getAnalysisRequestId());
 						an.setAnalysisRequestUid(analysisDTO.getAnalysisRequestUid());
+						
 						an.setLabId(anDTO.getLabId());
 						an.setResult(analysisDTO.getResult());
 						an.setStatus(analysisDTO.getStatus());
