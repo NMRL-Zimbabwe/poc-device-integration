@@ -1,144 +1,154 @@
-<div class="row">
-  <div class="col-md-9">
-    <h1 class="display-5 text-uppercase">Poc Device Integration System</h1>
+<h1 class="display-5 text-uppercase">Poc Device Integration System</h1>
 
-    <div [ngSwitch]="account !== null">
-      <div class="alert alert-success" *ngSwitchCase="true">
-        <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message" [translateValues]="{ username: account.login }"
-          >You are logged in as user "{{ account.login }}".</span
-        >
-      </div>
-      <div class="row">
-        <div class="col-xl-3 col-sm-6 py-2">
-          <div class="card bg-success text-white h-100">
-            <div class="card-body bg-success">
-              <div class="rotate">
-                <i class="fa fa-user fa-4x"></i>
-              </div>
-              <h6 class="text-uppercase">Total Received</h6>
-              <h1 class="display-4">456</h1>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 py-2">
-          <div class="card bg-success text-white h-100">
-            <div class="card-body bg-success">
-              <div class="rotate">
-                <i class="fa fa-user fa-4x"></i>
-              </div>
-              <h6 class="text-uppercase">Total Synced</h6>
-              <h1 class="display-4">400</h1>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 py-2">
-          <div class="card bg-success text-white h-100">
-            <div class="card-body bg-success">
-              <div class="rotate">
-                <i class="fa fa-user fa-4x"></i>
-              </div>
-              <h6 class="text-uppercase">Total Errors</h6>
-              <h1 class="display-4">56</h1>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 py-2">
-          <div class="card bg-success text-white h-100">
-            <div class="card-body bg-success">
-              <div class="rotate">
-                <i class="fa fa-user fa-4x"></i>
-              </div>
-              <h6 class="text-uppercase">Total Subscribers</h6>
-              <h1 class="display-4">1</h1>
-            </div>
-          </div>
-        </div>
-      </div>
+<div [ngSwitch]="account !== null">
+  <!-- Logged Out View -->
+  <div *ngSwitchCase="false">
+    <div class="alert alert-warning">
+      <span jhiTranslate="global.messages.info.authenticated.prefix">If you want to </span>
+      <a class="alert-link" (click)="login()" jhiTranslate="global.messages.info.authenticated.link">sign in</a
+      ><span jhiTranslate="global.messages.info.authenticated.suffix"
+        >, you can try the default accounts:<br />- Administrator (login="admin" and password="admin") <br />- User (login="user" and
+        password="user").</span
+      >
+    </div>
 
-      <div class="mt-4" style="width: 100%; height: 500px">
-        <div id="receivedVssynced" style="width: 100%; height: 500px"></div>
-      </div>
-
-      <div class="alert alert-warning" *ngSwitchCase="false">
-        <span jhiTranslate="global.messages.info.authenticated.prefix">If you want to </span>
-        <a class="alert-link" (click)="login()" jhiTranslate="global.messages.info.authenticated.link">sign in</a
-        ><span jhiTranslate="global.messages.info.authenticated.suffix"
-          >, you can try the default accounts:<br />- Administrator (login="admin" and password="admin") <br />- User (login="user" and
-          password="user").</span
-        >
-      </div>
-
-      <div class="alert alert-warning" *ngSwitchCase="false">
-        <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>&nbsp;
-        <a class="alert-link" routerLink="account/register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
-      </div>
+    <div class="alert alert-warning">
+      <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>&nbsp;
+      <a class="alert-link" routerLink="account/register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
     </div>
   </div>
 
-  <div class="col-md-3">
-    <h6 class="h6 text-uppercase">API Controls</h6>
-    <hr />
-    <div class="btn-group" role="group" aria-label="API Controls">
-      <button
-        type="button"
-        class="btn btn-primary"
-        [ngClass]="['btn', 'btn-' + (apiSyncing === true ? 'success' : 'primary')]"
-        (click)="apiSync(true)"
-        [disabled]="apiSyncing"
-      >
-        <div class="me-2 spinner-grow spinner-grow-sm text-light" role="status" *ngIf="apiSyncing">
-          <span class="visually-hidden">Syncing...</span>
-        </div>
-        <span>{{ apiSyncing === true ? 'Syncing ...' : 'Start syncing' }}</span>
-      </button>
-      <button
-        type="button"
-        class="btn btn-primary"
-        [ngClass]="['btn', 'btn-' + (apiSyncing === false ? 'secondary' : 'danger')]"
-        (click)="apiSync(false)"
-        [disabled]="!apiSyncing"
-      >
-        {{ apiSyncing === false ? 'Stopped!' : 'Stop syncing' }}
-      </button>
-    </div>
+  <!-- Logged In View -->
+  <div *ngSwitchCase="true">
+    <div class="row">
+      <div class="col-md-9">
+        <div>
+          <div>
+            <div class="alert alert-success">
+              <span
+                id="home-logged-message"
+                *ngIf="account"
+                jhiTranslate="home.logged.message"
+                [translateValues]="{ username: account.login }"
+                >You are logged in as user "{{ account.login }}".</span
+              >
+            </div>
+            <div class="row">
+              <div class="col-xl-3 col-sm-6 py-2">
+                <div class="card bg-success text-white h-100">
+                  <div class="card-body bg-success">
+                    <div class="rotate">
+                      <i class="fa fa-user fa-4x"></i>
+                    </div>
+                    <h6 class="text-uppercase">Total Received</h6>
+                    <h1 class="display-4">456</h1>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 py-2">
+                <div class="card bg-success text-white h-100">
+                  <div class="card-body bg-success">
+                    <div class="rotate">
+                      <i class="fa fa-user fa-4x"></i>
+                    </div>
+                    <h6 class="text-uppercase">Total Synced</h6>
+                    <h1 class="display-4">400</h1>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 py-2">
+                <div class="card bg-success text-white h-100">
+                  <div class="card-body bg-success">
+                    <div class="rotate">
+                      <i class="fa fa-user fa-4x"></i>
+                    </div>
+                    <h6 class="text-uppercase">Total Errors</h6>
+                    <h1 class="display-4">56</h1>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 py-2">
+                <div class="card bg-success text-white h-100">
+                  <div class="card-body bg-success">
+                    <div class="rotate">
+                      <i class="fa fa-user fa-4x"></i>
+                    </div>
+                    <h6 class="text-uppercase">Total Subscribers</h6>
+                    <h1 class="display-4">1</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-    <h6 class="h6 mt-4 text-uppercase">Central repository Controls</h6>
-    <hr />
-    <div class="btn-group" role="group" aria-label="Central Repo Controls">
-      <button
-        type="button"
-        class="btn btn-primary"
-        [ngClass]="[
-          'btn',
-          'btn-' + (centralRepoSyncing === true ? 'success' : 'primary'),
-          'd-flex justify-content-start align-items-center'
-        ]"
-        (click)="centralRepoSync(true)"
-        [disabled]="centralRepoSyncing"
-      >
-        <div class="me-2 spinner-grow spinner-grow-sm text-light" role="status" *ngIf="centralRepoSyncing">
-          <span class="visually-hidden">Syncing...</span>
+            <jhi-sync-chart></jhi-sync-chart>
+          </div>
         </div>
-        <span>{{ centralRepoSyncing === true ? 'Syncing ...' : 'Start syncing' }}</span>
-      </button>
-      <button
-        type="button"
-        class="btn btn-primary"
-        [ngClass]="['btn', 'btn-' + (centralRepoSyncing === false ? 'secondary' : 'danger')]"
-        (click)="centralRepoSync(false)"
-        [disabled]="!centralRepoSyncing"
-      >
-        {{ centralRepoSyncing === false ? 'Stopped!' : 'Stop syncing' }}
-      </button>
-    </div>
+      </div>
 
-    <h6 class="h6 mt-4 text-uppercase">Rabbit MQ</h6>
-    <hr />
-    <div class="d-flex justify-content-start align-items-center mt-2">
-      <span class="me-4">Connection Status</span>
-      <span class="badge rounded-pill text-bg-danger">disconnected</span>
+      <div class="col-md-3">
+        <h6 class="h6 text-uppercase">API Controls</h6>
+        <hr />
+        <div class="btn-group" role="group" aria-label="API Controls">
+          <button
+            type="button"
+            class="btn btn-primary"
+            [ngClass]="['btn', 'btn-' + (apiSyncing === true ? 'success' : 'primary')]"
+            (click)="apiSync(1)"
+            [disabled]="apiSyncing"
+          >
+            <div class="me-2 spinner-grow spinner-grow-sm text-light" role="status" *ngIf="apiSyncing">
+              <span class="visually-hidden">Syncing...</span>
+            </div>
+            <span>{{ apiSyncing === true ? 'Syncing ...' : 'Start syncing' }}</span>
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            [ngClass]="['btn', 'btn-' + (apiSyncing === false ? 'secondary' : 'danger')]"
+            (click)="apiSync(0)"
+            [disabled]="!apiSyncing"
+          >
+            {{ apiSyncing === false ? 'Stopped!' : 'Stop syncing' }}
+          </button>
+        </div>
+
+        <h6 class="h6 mt-4 text-uppercase">Central repository Controls</h6>
+        <hr />
+        <div class="btn-group" role="group" aria-label="Central Repo Controls">
+          <button
+            type="button"
+            class="btn btn-primary"
+            [ngClass]="[
+              'btn',
+              'btn-' + (centralRepoSyncing === true ? 'success' : 'primary'),
+              'd-flex justify-content-start align-items-center'
+            ]"
+            (click)="centralRepoSync(1)"
+            [disabled]="centralRepoSyncing"
+          >
+            <div class="me-2 spinner-grow spinner-grow-sm text-light" role="status" *ngIf="centralRepoSyncing">
+              <span class="visually-hidden">Syncing...</span>
+            </div>
+            <span>{{ centralRepoSyncing === true ? 'Syncing ...' : 'Start syncing' }}</span>
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            [ngClass]="['btn', 'btn-' + (centralRepoSyncing === false ? 'secondary' : 'danger')]"
+            (click)="centralRepoSync(0)"
+            [disabled]="!centralRepoSyncing"
+          >
+            {{ centralRepoSyncing === false ? 'Stopped!' : 'Stop syncing' }}
+          </button>
+        </div>
+
+        <h6 class="h6 mt-4 text-uppercase">Rabbit MQ</h6>
+        <hr />
+        <div class="d-flex justify-content-start align-items-center mt-2">
+          <span class="me-4">Connection Status</span>
+          <span class="badge rounded-pill text-bg-danger">disconnected</span>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="col-md-3"></div>
 </div>

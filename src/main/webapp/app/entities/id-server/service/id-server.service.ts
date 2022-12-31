@@ -7,29 +7,28 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { IIdServer, NewIdServer } from '../id-server.model';
 
-export type PartialUpdateSampleType = Partial<IIdServer> & Pick<IIdServer, 'id'>;
-
+export type PartialUpdateIdServer = Partial<IIdServer> & Pick<IIdServer, 'id'>;
 export type EntityResponseType = HttpResponse<IIdServer>;
 export type EntityArrayResponseType = HttpResponse<IIdServer[]>;
 
 @Injectable({ providedIn: 'root' })
 export class IdServerService {
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/sample-types');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/id-servers');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
-  create(sampleType: NewIdServer): Observable<EntityResponseType> {
-    return this.http.post<IIdServer>(this.resourceUrl, sampleType, { observe: 'response' });
+  create(idServer: NewIdServer): Observable<EntityResponseType> {
+    return this.http.post<IIdServer>(this.resourceUrl, idServer, { observe: 'response' });
   }
 
-  update(sampleType: IIdServer): Observable<EntityResponseType> {
-    return this.http.put<IIdServer>(`${this.resourceUrl}/${this.getSampleTypeIdentifier(sampleType)}`, sampleType, {
+  update(idServer: IIdServer): Observable<EntityResponseType> {
+    return this.http.put<IIdServer>(`${this.resourceUrl}`, idServer, {
       observe: 'response',
     });
   }
 
-  partialUpdate(sampleType: PartialUpdateSampleType): Observable<EntityResponseType> {
-    return this.http.patch<IIdServer>(`${this.resourceUrl}/${this.getSampleTypeIdentifier(sampleType)}`, sampleType, {
+  partialUpdate(idServer: PartialUpdateIdServer): Observable<EntityResponseType> {
+    return this.http.patch<IIdServer>(`${this.resourceUrl}/${this.getIdServerIdentifier(idServer)}`, idServer, {
       observe: 'response',
     });
   }
@@ -47,31 +46,31 @@ export class IdServerService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getSampleTypeIdentifier(sampleType: Pick<IIdServer, 'id'>): number {
-    return sampleType.id;
+  getIdServerIdentifier(idServer: Pick<IIdServer, 'id'>): number {
+    return idServer.id;
   }
 
-  compareSampleType(o1: Pick<IIdServer, 'id'> | null, o2: Pick<IIdServer, 'id'> | null): boolean {
-    return o1 && o2 ? this.getSampleTypeIdentifier(o1) === this.getSampleTypeIdentifier(o2) : o1 === o2;
+  compareIdServer(o1: Pick<IIdServer, 'id'> | null, o2: Pick<IIdServer, 'id'> | null): boolean {
+    return o1 && o2 ? this.getIdServerIdentifier(o1) === this.getIdServerIdentifier(o2) : o1 === o2;
   }
 
-  addSampleTypeToCollectionIfMissing<Type extends Pick<IIdServer, 'id'>>(
-    sampleTypeCollection: Type[],
-    ...sampleTypesToCheck: (Type | null | undefined)[]
+  addIdServerToCollectionIfMissing<Type extends Pick<IIdServer, 'id'>>(
+    idServerCollection: Type[],
+    ...idServersToCheck: (Type | null | undefined)[]
   ): Type[] {
-    const sampleTypes: Type[] = sampleTypesToCheck.filter(isPresent);
-    if (sampleTypes.length > 0) {
-      const sampleTypeCollectionIdentifiers = sampleTypeCollection.map(sampleTypeItem => this.getSampleTypeIdentifier(sampleTypeItem)!);
-      const sampleTypesToAdd = sampleTypes.filter(sampleTypeItem => {
-        const sampleTypeIdentifier = this.getSampleTypeIdentifier(sampleTypeItem);
-        if (sampleTypeCollectionIdentifiers.includes(sampleTypeIdentifier)) {
+    const idServers: Type[] = idServersToCheck.filter(isPresent);
+    if (idServers.length > 0) {
+      const idServerCollectionIdentifiers = idServerCollection.map(idServerItem => this.getIdServerIdentifier(idServerItem)!);
+      const idServersToAdd = idServers.filter(idServerItem => {
+        const idServerIdentifier = this.getIdServerIdentifier(idServerItem);
+        if (idServerCollectionIdentifiers.includes(idServerIdentifier)) {
           return false;
         }
-        sampleTypeCollectionIdentifiers.push(sampleTypeIdentifier);
+        idServerCollectionIdentifiers.push(idServerIdentifier);
         return true;
       });
-      return [...sampleTypesToAdd, ...sampleTypeCollection];
+      return [...idServersToAdd, ...idServerCollection];
     }
-    return sampleTypeCollection;
+    return idServerCollection;
   }
 }

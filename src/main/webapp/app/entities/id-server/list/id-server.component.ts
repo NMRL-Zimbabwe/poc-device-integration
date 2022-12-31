@@ -29,13 +29,13 @@ export class IdServerComponent implements OnInit {
   page = 1;
 
   constructor(
-    protected sampleTypeService: IdServerService,
+    protected idServerService: IdServerService,
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected modalService: NgbModal
   ) {}
 
-  trackId = (_index: number, item: IIdServer): number => this.sampleTypeService.getSampleTypeIdentifier(item);
+  trackId = (_index: number, item: IIdServer): number => this.idServerService.getIdServerIdentifier(item);
 
   ngOnInit(): void {
     this.load();
@@ -121,7 +121,7 @@ export class IdServerComponent implements OnInit {
     filterOptions?.forEach(filterOption => {
       queryObject[filterOption.name] = filterOption.values;
     });
-    return this.sampleTypeService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
+    return this.idServerService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
 
   protected handleNavigation(page = this.page, predicate?: string, ascending?: boolean, filterOptions?: IFilterOption[]): void {
