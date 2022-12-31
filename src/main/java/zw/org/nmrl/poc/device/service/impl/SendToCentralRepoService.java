@@ -22,12 +22,14 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import zw.org.nmrl.poc.device.domain.Patient;
 import zw.org.nmrl.poc.device.domain.AnalysisRequest;
+import zw.org.nmrl.poc.device.domain.IdServer;
+import zw.org.nmrl.poc.device.domain.Patient;
 import zw.org.nmrl.poc.device.management.enumeration.LaboratoryRequestStatus;
-import zw.org.nmrl.poc.device.repository.ClientRepository;
-import zw.org.nmrl.poc.device.repository.PatientRepository;
 import zw.org.nmrl.poc.device.repository.AnalysisRequestRepository;
+import zw.org.nmrl.poc.device.repository.ClientRepository;
+import zw.org.nmrl.poc.device.repository.IdServerRepository;
+import zw.org.nmrl.poc.device.repository.PatientRepository;
 import zw.org.nmrl.poc.device.service.dto.AnalysisRequestAnalysisProfileDTO;
 import zw.org.nmrl.poc.device.service.dto.PatientDTO;
 import zw.org.nmrl.poc.device.service.dto.UnifiedPatientSampleCaseAnalysisDTO;
@@ -44,6 +46,9 @@ public class SendToCentralRepoService {
 
 	@Autowired
 	ClientRepository clientRepository;
+	
+	@Autowired
+	IdServerRepository idServerRepository;
 
 	@Autowired
 	@Qualifier(value = "centralRepository")
@@ -62,8 +67,19 @@ public class SendToCentralRepoService {
 
 	@Scheduled(fixedRate = 5000)
 	public void requestBuilder() throws Exception {
+		
+		/*
+		 * IdServer id = idServerRepository.findByPrefixIgnoreCase("Scheduled");
+		 * 
+		 * if (id == null) { log.debug("Scheduled task has not been setup");
+		 * 
+		 * return; }
+		 * 
+		 * if (id != null && id.getNumber() != 1) {
+		 * log.debug("Syncing of Samples  Scheduled task is turned off"); return; }
+		 */
 		/**
-		 * Search for records that have not been sent to LIMS
+		 * Search for records that have not been sent to Central Repository
 		 */
 
 		UnifiedPatientSampleCaseAnalysisDTO unifiedLimsRequest = new UnifiedPatientSampleCaseAnalysisDTO();
