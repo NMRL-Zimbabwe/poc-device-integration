@@ -34,6 +34,11 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'pocDeviceIntegrationApp.samplePatient.home.title' },
         loadChildren: () => import('./sample-patient/sample-patient.module').then(m => m.SamplePatientModule),
       },
+      {
+        path: 'id-server',
+        data: { pageTitle: 'pocDeviceIntegrationApp.samplePatient.home.title' },
+        loadChildren: () => import('./id-server/id-server.module').then(m => m.IdServerModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],
