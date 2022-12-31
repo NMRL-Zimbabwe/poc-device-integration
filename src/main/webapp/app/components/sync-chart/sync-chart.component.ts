@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IDashBoardSync } from 'app/models/dashboard.model';
+import { DashBoardStatsService } from 'app/services/dashboard-stats.service';
 import * as echarts from 'echarts';
 
 @Component({
@@ -7,51 +9,37 @@ import * as echarts from 'echarts';
   styleUrls: ['./sync-chart.component.scss'],
 })
 export class SyncChartComponent implements OnInit {
-  constructor() {
-    const a = 1 + 1;
-  }
+  months: string[] = [];
+  data: IDashBoardSync[] = [];
+  loading = false;
+
+  constructor(private dashBoardStatsService: DashBoardStatsService) {}
 
   ngOnInit(): void {
-    this.plotTotalReceivedVsTestedChart(
-      ['jan', 'feb', 'march', 'april', 'may'],
-      [20, 120, 70, 130, 56],
-      [20, 120, 70, 130, 0],
-      'receivedVssynced'
-    );
+    this.dashBoardStatsService.aggregateData$.subscribe(data => {
+      this.months = data.months;
+      this.loading = data.fetching;
+      this.data = data.data;
+      this.plotChart();
+    });
   }
 
-  // this.labData = this.sampleTotalsData.filter(d => d.reportingSite === this.lab);
+  plotChart(): void {
+    const received: number[] = [];
+    const synced: number[] = [];
 
-  // // data setup
-  // let _tests: string[] = [];
-  // let _years: string[] = [];
-  // let _months: string[] = [];
+    this.months.forEach(month => {
+      const monthData = this.data.filter(d => d.monthName === month);
+      const totRec = monthData.reduce((acc, d): number => acc + d.totalReceived, 0);
+      received.push(totRec);
+      const totSync = monthData.reduce((acc, d): number => acc + d.totalSynced, 0);
+      synced.push(totSync);
+    });
 
-  // this.labData.forEach(datum => {
-  //   _tests.push(datum.testName);
-  //   _years.push(datum.year);
-  //   _months.push(datum.monthName);
-  // });
+    this.charter(this.months, received, synced, 'receivedVssynced');
+  }
 
-  // this.tests = [...new Set(_tests)].sort();
-  // this.test = this.tests[0];
-  // this.years = [...new Set(_years)];
-  // this.year = this.years[0];
-  // this.months = [...new Set(_months)];
-
-  // let totalTested: number[] = [];
-  // let totalRegistered: number[] = [];
-
-  // this.years.forEach(year => {
-  //   let datums = this.labData.filter(t => +t.year === +year);
-  //   const totalR = datums.reduce((acc, val): number => (acc = acc + +val.totalRegistered), 0);
-  //   totalRegistered.push(totalR);
-  //   const totalT = datums.reduce((acc, val): number => (acc = acc + +val.totalTested), 0);
-  //   totalTested.push(totalT);
-  // });
-  // this.plotTotalReceivedVsTestedChart(this.years, totalRegistered, totalTested, 'sample-totals');
-
-  plotTotalReceivedVsTestedChart(categories: string[], totalRegistered: number[], totalTested: number[], chartId: string): void {
+  charter(categories: string[], totalRegistered: number[], totalTested: number[], chartId: string): void {
     const chartDom = document.getElementById(chartId);
     const myChart = echarts.init(chartDom!);
     const option = {
@@ -104,6 +92,7 @@ export class SyncChartComponent implements OnInit {
           name: 'Total Received',
           type: 'bar',
           data: totalRegistered,
+          barMaxWidth: 50,
         },
         {
           name: 'Total Synced',

@@ -41,7 +41,7 @@
                       <i class="fa fa-user fa-4x"></i>
                     </div>
                     <h6 class="text-uppercase">Total Received</h6>
-                    <h1 class="display-4">456</h1>
+                    <h1 class="display-4">{{ totalReceived }}</h1>
                   </div>
                 </div>
               </div>
@@ -52,7 +52,7 @@
                       <i class="fa fa-user fa-4x"></i>
                     </div>
                     <h6 class="text-uppercase">Total Synced</h6>
-                    <h1 class="display-4">400</h1>
+                    <h1 class="display-4">{{ totalSynced }}</h1>
                   </div>
                 </div>
               </div>
@@ -63,7 +63,7 @@
                       <i class="fa fa-user fa-4x"></i>
                     </div>
                     <h6 class="text-uppercase">Total Errors</h6>
-                    <h1 class="display-4">56</h1>
+                    <h1 class="display-4">{{ totalError }}</h1>
                   </div>
                 </div>
               </div>
@@ -74,7 +74,7 @@
                       <i class="fa fa-user fa-4x"></i>
                     </div>
                     <h6 class="text-uppercase">Total Subscribers</h6>
-                    <h1 class="display-4">1</h1>
+                    <h1 class="display-4">{{ totalSubscribers }}</h1>
                   </div>
                 </div>
               </div>
@@ -146,7 +146,7 @@
         <hr />
         <div class="d-flex justify-content-start align-items-center mt-2">
           <span class="me-4">Connection Status</span>
-          <span class="badge rounded-pill text-bg-danger">disconnected</span>
+          <span class="badge rounded-pill text-bg-success">connected</span>
         </div>
       </div>
     </div>
