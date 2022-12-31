@@ -15,16 +15,16 @@
 				<constraints nullable="false" />
 			</column>
 			<column name="analysis_uid" type="varchar(255)">
-				<constraints nullable="false" />
+				<constraints nullable="true" />
 			</column>
 			<column name="analysis_request_id" type="varchar(255)">
-				<constraints nullable="false" />
+				<constraints nullable="true" />
 			</column>
 			<column name="analysis_request_uid" type="varchar(255)">
-				<constraints nullable="false" />
+				<constraints nullable="true" />
 			</column>
 			<column name="lab_id" type="varchar(255)">
-				<constraints nullable="false" />
+				<constraints nullable="true" />
 			</column>
 			<column name="result" type="varchar(255)">
 				<constraints nullable="true" />
