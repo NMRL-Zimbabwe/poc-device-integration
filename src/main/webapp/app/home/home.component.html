@@ -1,8 +1,6 @@
 <div class="row">
-  
-
   <div class="col-md-9">
-    <h1 class="display-4">Poc Device Integration System</h1>
+    <h1 class="display-5 text-uppercase">Poc Device Integration System</h1>
 
     <div [ngSwitch]="account !== null">
       <div class="alert alert-success" *ngSwitchCase="true">
@@ -78,32 +76,69 @@
   </div>
 
   <div class="col-md-3">
-    <div>API Controls
-    </div>
-    <div><button type="button" class="btn btn-primary button5">Start Syncing</button>
-    </div>
-    <div><button type="button" class="btn btn-primary button5">Stop Syncing</button>
-    </div>
-    <div><button type="button" class="btn btn-primary button5">Resume Syncing</button>
-    </div>
-    <div>
-      <i class="glyphicon glyphicon-ok">Connection Status</i>
+    <h6 class="h6 text-uppercase">API Controls</h6>
+    <hr />
+    <div class="btn-group" role="group" aria-label="API Controls">
+      <button
+        type="button"
+        class="btn btn-primary"
+        [ngClass]="['btn', 'btn-' + (apiSyncing === true ? 'success' : 'primary')]"
+        (click)="apiSync(true)"
+        [disabled]="apiSyncing"
+      >
+        <div class="me-2 spinner-grow spinner-grow-sm text-light" role="status" *ngIf="apiSyncing">
+          <span class="visually-hidden">Syncing...</span>
+        </div>
+        <span>{{ apiSyncing === true ? 'Syncing ...' : 'Start syncing' }}</span>
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        [ngClass]="['btn', 'btn-' + (apiSyncing === false ? 'secondary' : 'danger')]"
+        (click)="apiSync(false)"
+        [disabled]="!apiSyncing"
+      >
+        {{ apiSyncing === false ? 'Stopped!' : 'Stop syncing' }}
+      </button>
     </div>
 
-    <div>Central repository Controls
+    <h6 class="h6 mt-4 text-uppercase">Central repository Controls</h6>
+    <hr />
+    <div class="btn-group" role="group" aria-label="Central Repo Controls">
+      <button
+        type="button"
+        class="btn btn-primary"
+        [ngClass]="[
+          'btn',
+          'btn-' + (centralRepoSyncing === true ? 'success' : 'primary'),
+          'd-flex justify-content-start align-items-center'
+        ]"
+        (click)="centralRepoSync(true)"
+        [disabled]="centralRepoSyncing"
+      >
+        <div class="me-2 spinner-grow spinner-grow-sm text-light" role="status" *ngIf="centralRepoSyncing">
+          <span class="visually-hidden">Syncing...</span>
+        </div>
+        <span>{{ centralRepoSyncing === true ? 'Syncing ...' : 'Start syncing' }}</span>
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        [ngClass]="['btn', 'btn-' + (centralRepoSyncing === false ? 'secondary' : 'danger')]"
+        (click)="centralRepoSync(false)"
+        [disabled]="!centralRepoSyncing"
+      >
+        {{ centralRepoSyncing === false ? 'Stopped!' : 'Stop syncing' }}
+      </button>
     </div>
-    <div><button type="button" class="btn btn-primary button5">Start Syncing</button>
-    </div>
-    <div><button type="button" class="btn btn-primary button5">Stop Syncing</button>
-    </div>
-    <div><button type="button" class="btn btn-primary button5">Resume Syncing</button>
-    </div>
-    <div>
-      <i class="glyphicon glyphicon-ok">Connection Status</i>
+
+    <h6 class="h6 mt-4 text-uppercase">Rabbit MQ</h6>
+    <hr />
+    <div class="d-flex justify-content-start align-items-center mt-2">
+      <span class="me-4">Connection Status</span>
+      <span class="badge rounded-pill text-bg-danger">disconnected</span>
     </div>
   </div>
- 
-  <div class="col-md-3">
-  
-  </div>
+
+  <div class="col-md-3"></div>
 </div>

@@ -15,6 +15,8 @@ import * as echarts from 'echarts';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
+  apiSyncing = false;
+  centralRepoSyncing = false;
 
   private readonly destroy$ = new Subject<void>();
 
@@ -41,6 +43,24 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  apiSync(start: boolean): void {
+    this.apiSyncing = start;
+    if (start) {
+      //
+    } else {
+      //
+    }
+  }
+
+  centralRepoSync(start: boolean): void {
+    this.centralRepoSyncing = start;
+    if (start) {
+      //
+    } else {
+      //
+    }
   }
 
   // this.labData = this.sampleTotalsData.filter(d => d.reportingSite === this.lab);
