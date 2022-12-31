@@ -94,6 +94,18 @@
             <li>
               <a
                 class="dropdown-item"
+                routerLink="id-server"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <span >Id Server</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
                 routerLink="analysis-service"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
