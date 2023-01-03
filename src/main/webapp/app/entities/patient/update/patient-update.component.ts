@@ -40,7 +40,7 @@ export class PatientUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const patient = this.patientFormService.getPatient(this.editForm);
-    if (patient.id !== null) {
+    if (patient.patientId !== null) {
       this.subscribeToSaveResponse(this.patientService.update(patient));
     } else {
       this.subscribeToSaveResponse(this.patientService.create(patient));

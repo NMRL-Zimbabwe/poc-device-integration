@@ -20,7 +20,7 @@ export class PatientComponent implements OnInit {
   patients?: IPatient[];
   isLoading = false;
 
-  predicate = 'id';
+  predicate = 'patientId';
   ascending = true;
   filters: IFilterOptions = new FilterOptions();
 
@@ -35,7 +35,7 @@ export class PatientComponent implements OnInit {
     protected modalService: NgbModal
   ) {}
 
-  trackId = (_index: number, item: IPatient): number => this.patientService.getPatientIdentifier(item);
+  trackId = (_index: string, item: IPatient): string => this.patientService.getPatientIdentifier(item);
 
   ngOnInit(): void {
     this.load();

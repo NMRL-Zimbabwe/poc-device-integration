@@ -19,7 +19,7 @@ describe('Patient Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
+            patientId: expect.any(Object),
             firstName: expect.any(Object),
             lastName: expect.any(Object),
             dob: expect.any(Object),
@@ -36,7 +36,7 @@ describe('Patient Form Service', () => {
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
-            id: expect.any(Object),
+            patientId: expect.any(Object),
             firstName: expect.any(Object),
             lastName: expect.any(Object),
             dob: expect.any(Object),

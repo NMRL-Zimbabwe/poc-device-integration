@@ -12,7 +12,7 @@
       <dl class="row-md jh-entity-details">
         <dt><span jhiTranslate="global.field.id">ID</span></dt>
         <dd>
-          <span>{{ patient.id }}</span>
+          <span>{{ patient.patientId }}</span>
         </dd>
         <dt><span jhiTranslate="pocDeviceIntegrationApp.patient.firstName">First Name</span></dt>
         <dd>
@@ -48,7 +48,7 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/patient', patient.id, 'edit']" class="btn btn-primary">
+      <button type="button" [routerLink]="['/patient', patient.patientId, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

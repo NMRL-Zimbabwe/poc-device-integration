@@ -10,7 +10,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { IPatient, NewPatient } from '../patient.model';
 
-export type PartialUpdatePatient = Partial<IPatient> & Pick<IPatient, 'id'>;
+export type PartialUpdatePatient = Partial<IPatient> & Pick<IPatient, 'patientId'>;
 
 type RestOf<T extends IPatient | NewPatient> = Omit<T, 'dob'> & {
   dob?: string | null;
@@ -65,19 +65,19 @@ export class PatientService {
       .pipe(map(res => this.convertResponseArrayFromServer(res)));
   }
 
-  delete(id: number): Observable<HttpResponse<{}>> {
+  delete(id: string): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getPatientIdentifier(patient: Pick<IPatient, 'id'>): number {
-    return patient.id;
+  getPatientIdentifier(patient: Pick<IPatient, 'patientId'>): string {
+    return patient.patientId;
   }
 
-  comparePatient(o1: Pick<IPatient, 'id'> | null, o2: Pick<IPatient, 'id'> | null): boolean {
+  comparePatient(o1: Pick<IPatient, 'patientId'> | null, o2: Pick<IPatient, 'patientId'> | null): boolean {
     return o1 && o2 ? this.getPatientIdentifier(o1) === this.getPatientIdentifier(o2) : o1 === o2;
   }
 
-  addPatientToCollectionIfMissing<Type extends Pick<IPatient, 'id'>>(
+  addPatientToCollectionIfMissing<Type extends Pick<IPatient, 'patientId'>>(
     patientCollection: Type[],
     ...patientsToCheck: (Type | null | undefined)[]
   ): Type[] {

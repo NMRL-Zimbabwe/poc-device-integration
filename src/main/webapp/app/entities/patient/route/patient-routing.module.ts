@@ -13,12 +13,12 @@ const patientRoute: Routes = [
     path: '',
     component: PatientComponent,
     data: {
-      defaultSort: 'id,' + ASC,
+      defaultSort: 'patientId,' + ASC,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/view',
+    path: ':patientId/view',
     component: PatientDetailComponent,
     resolve: {
       patient: PatientRoutingResolveService,
@@ -34,7 +34,7 @@ const patientRoute: Routes = [
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
+    path: ':patientId/edit',
     component: PatientUpdateComponent,
     resolve: {
       patient: PatientRoutingResolveService,

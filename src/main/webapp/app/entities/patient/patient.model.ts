@@ -1,7 +1,7 @@
 import dayjs from 'dayjs/esm';
 
 export interface IPatient {
-  id: number;
+  patientId:  string;
   firstName?: string | null;
   lastName?: string | null;
   dob?: dayjs.Dayjs | null;
@@ -11,4 +11,4 @@ export interface IPatient {
   clientPatientId?: string | null;
 }
 
-export type NewPatient = Omit<IPatient, 'id'> & { id: null };
+export type NewPatient = Omit<IPatient, 'patientId'> & { patientId: null };

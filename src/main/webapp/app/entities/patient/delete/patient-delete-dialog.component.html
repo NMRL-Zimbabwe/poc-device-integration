@@ -1,4 +1,4 @@
-<form *ngIf="patient" name="deleteForm" (ngSubmit)="confirmDelete(patient.id!)">
+<form *ngIf="patient" name="deleteForm" (ngSubmit)="confirmDelete(patient.patientId!)">
   <div class="modal-header">
     <h4 class="modal-title" data-cy="patientDeleteDialogHeading" jhiTranslate="entity.delete.title">Confirm delete operation</h4>
 
@@ -10,9 +10,9 @@
     <p
       id="jhi-delete-patient-heading"
       jhiTranslate="pocDeviceIntegrationApp.patient.delete.question"
-      [translateValues]="{ id: patient.id }"
+      [translateValues]="{ id: patient.patientId }"
     >
-      Are you sure you want to delete Patient {{ patient.id }}?
+      Are you sure you want to delete Patient {{ patient.patientId }}?
     </p>
   </div>
 

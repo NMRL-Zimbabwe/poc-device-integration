@@ -34,7 +34,7 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
-          <th scope="col" jhiSortBy="id">
+          <th scope="col" jhiSortBy="patientId">
             <div class="d-flex">
               <span jhiTranslate="global.field.id">ID</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -85,10 +85,10 @@
           <th scope="col"></th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let patient of patients; trackBy: trackId" data-cy="entityTable">
+      <tbody><!-- trackBy: trackId" -->
+        <tr *ngFor="let patient of patients;"  data-cy="entityTable">
           <td>
-            <a [routerLink]="['/patient', patient.id, 'view']">{{ patient.id }}</a>
+            <a [routerLink]="['/patient', patient.patientId, 'view']">{{ patient.patientId }}</a>
           </td>
           <td>{{ patient.firstName }}</td>
           <td>{{ patient.lastName }}</td>
@@ -101,7 +101,7 @@
             <div class="btn-group">
               <button
                 type="submit"
-                [routerLink]="['/patient', patient.id, 'view']"
+                [routerLink]="['/patient', patient.patientId, 'view']"
                 class="btn btn-info btn-sm"
                 data-cy="entityDetailsButton"
               >
@@ -111,7 +111,7 @@
 
               <button
                 type="submit"
-                [routerLink]="['/patient', patient.id, 'edit']"
+                [routerLink]="['/patient', patient.patientId, 'edit']"
                 class="btn btn-primary btn-sm"
                 data-cy="entityEditButton"
               >
